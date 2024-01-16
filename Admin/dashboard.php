@@ -1,0 +1,1 @@
+<a href="../process/logout.php">Logout</a>
