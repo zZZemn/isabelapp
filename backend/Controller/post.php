@@ -22,11 +22,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         echo 'Login Failed';
                     }
                 } elseif ($_POST['UserType'] == 'SMEs') {
-                    echo 'SMEs';
+                    $password = $_POST['password'];
+                    $loginResult = $db->login($_POST['smesType'], $_POST['username']);
+                    if ($loginResult->num_rows > 0) {
+                        $user = $loginResult->fetch_assoc();
+                        if (password_verify($password, $user['PASSWORD'])) {
+                            session_start();
+                            $_SESSION['smes_id'] = $user['ID'];
+                            $_SESSION['smes_type'] = $_POST['smesType'];
+                            echo 200;
+                        } else {
+                            echo 'Login Failed';
+                        }
+                    } else {
+                        echo 'Login Failed';
+                    }
                 } else {
                     echo 'Tourist';
                 }
             }
+        } elseif ($_POST['SubmitType'] == 'AccomSignUp') {
+            echo 'hey';
         }
     }
 }

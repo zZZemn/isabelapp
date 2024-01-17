@@ -34,4 +34,26 @@ $(document).ready(function () {
       },
     });
   });
+
+  $("#frmSMEsLogin").submit(function (e) {
+    e.preventDefault();
+    var username = $("#smesUsername").val();
+    var password = $("#smesPassword").val();
+    var accountType = $("#smesAccountType").val();
+
+    $.ajax({
+      type: "POST",
+      url: "../backend/Controller/post.php",
+      data: {
+        SubmitType: "Login",
+        UserType: "SMEs",
+        smesType: accountType,
+        username: username,
+        password: password,
+      },
+      success: function (response) {
+        console.log(response);
+      },
+    });
+  });
 });

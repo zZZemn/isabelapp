@@ -26,4 +26,22 @@ class global_class extends db_connect
             return $result;
         }
     }
+
+    public function checkSmesId($smesType, $id)
+    {
+        if ($smesType == 'accommodation') {
+            $query = $this->conn->prepare("SELECT * FROM `accommodation` WHERE `ACCOM_ID` = '$id'");
+        } elseif ($smesType == 'seller') {
+            $query = $this->conn->prepare("SELECT * FROM `seller` WHERE `SELLER_ID` = '$id'");
+        } elseif ($smesType == 'restaurant') {
+            $query = $this->conn->prepare("SELECT * FROM `restaurant` WHERE `RESTO_ID` = '$id'");
+        } else {
+            return $smesType;
+        }
+
+        if ($query->execute()) {
+            $result = $query->get_result();
+            return $result;
+        }
+    }
 }
