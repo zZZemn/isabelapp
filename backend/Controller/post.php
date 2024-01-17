@@ -66,6 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
 
             echo $signup;
+        } elseif ($_POST['SubmitType'] == 'EditAccomDetails') {
+            echo $db->editAccomDetails($_POST);
         }
     }
 }

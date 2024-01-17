@@ -75,4 +75,33 @@ class global_class extends db_connect
             return 200;
         }
     }
+
+    public function getSMEsImages($id)
+    {
+        $query = $this->conn->prepare("SELECT * FROM `smes_img` WHERE `SMES_ID` = '$id'");
+        if ($query->execute()) {
+            $result = $query->get_result();
+            return $result;
+        }
+    }
+
+
+    // Accommodation
+    public function editAccomDetails($post)
+    {
+        $id = $post['accomId'];
+        $name = $post['accomName'];
+        $description = $post['accomDescription'];
+        $address = $post['accomAddress'];
+        $map = $post['accomMap'];
+        $email = $post['accomEmail'];
+        $contactNo = $post['accomContactNo'];
+        $fb = $post['accomFB'];
+        $ig = $post['accomIG'];
+
+        $query = $this->conn->prepare("UPDATE `accommodation` SET `ACCOM_NAME`='$name',`ADDRESS`='$address',`MAP`='$map',`DESCRIPTION`='$description',`EMAIL`='$email',`CONTACT_NO`='$contactNo',`FACEBOOK_LINK`='$fb',`INSTAGRAM_LINK`='$id',`STATUS`='1' WHERE `ACCOM_ID` = '$id'");
+        if ($query->execute()) {
+            return 200;
+        }
+    }
 }
