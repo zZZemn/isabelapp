@@ -1,20 +1,18 @@
 $(document).ready(function () {
-  $("#frmSMEsAccomSignUp").submit(function (e) {
+  $("#frmSMEsSignUp").submit(function (e) {
     e.preventDefault();
-    var name = $("#accomName").val();
-    var address = $("#accomAddress").val();
-    var username = $("#accomUsername").val();
-    var password = $("#accomPassword").val();
+    var name = $("#smesName").val();
+    var address = $("#smesAddress").val();
+    var username = $("#smesUsername").val();
+    var password = $("#smesPassword").val();
+    var smesType = $("#smesType").val();
 
-    console.log(name);
-    console.log(address);
-    console.log(username);
-    console.log(password);
     $.ajax({
       type: "POST",
       url: "../backend/Controller/post.php",
       data: {
-        SubmitType: "AccomSignUp",
+        SubmitType: "SMEsSignUp",
+        smesType: smesType,
         name: name,
         address: address,
         username: username,

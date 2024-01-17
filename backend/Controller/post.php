@@ -41,8 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     echo 'Tourist';
                 }
             }
-        } elseif ($_POST['SubmitType'] == 'AccomSignUp') {
-            echo 'hey';
+        } elseif ($_POST['SubmitType'] == 'SMEsSignUp') {
+            echo $db->SMEsSignup($_POST['smesType'], $_POST['name'], $_POST['address'], $_POST['username'], $_POST['password']);
         }
     }
 }

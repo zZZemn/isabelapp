@@ -40,30 +40,30 @@ function pleaseSelectAccountType()
 
 if (isset($_GET['smes_type'])) {
     $smesType = $_GET['smes_type'];
-    if ($smesType == 'accommodation') {
+    if ($smesType == 'accommodation' || $smesType == 'seller' || $smesType == 'restaurant') {
 ?>
-        <form id="frmSMEsAccomSignUp" class="frm-signup container card p-5 mt-5">
+        <form id="frmSMEsSignUp" class="frm-signup container card p-5 mt-5">
             <center>
                 <h5 class="text-success">ISABELAPP</h5>
                 <img src="../assets/system-img/logo.png" class="login-logo">
-                <h6 class="">Accommodation Account Signup</h6>
+                <h6 class=""><?= ucfirst($smesType) ?> Account Signup</h6>
             </center>
             <div class="input-container">
-                <label for="accomName">Accommodation Name</label>
-                <input type="text" class="form-control" id="accomName" required>
+                <label for="smesName"><?= ucfirst($smesType) ?> Name</label>
+                <input type="text" class="form-control" id="smesName" required>
             </div>
             <div class="input-container">
-                <label for="accomAddress">Address</label>
-                <input type="text" class="form-control" id="accomAddress" placeholder="st / blg / blk & lot, barangay, municipality" required>
+                <label for="smesAddress">Address</label>
+                <input type="text" class="form-control" id="smesAddress" placeholder="st / blg / blk & lot, barangay, municipality" required>
             </div>
             <div class="input-container">
-                <label for="accomUsername">Username</label>
-                <input type="text" class="form-control" id="accomUsername" required>
+                <label for="smesUsername">Username</label>
+                <input type="text" class="form-control" id="smesUsername" required>
             </div>
             <div class="input-container">
-                <label for="accomPassword">Password</label>
+                <label for="smesPassword">Password</label>
                 <div class="loginPasswordContainer">
-                    <input type="password" id="accomPassword" class="input-password form-control input" required required>
+                    <input type="password" id="smesPassword" class="input-password form-control input" required required>
                     <button type="button" id="btnShowPassword" class="btn">
                         <i class="show-password-icon bi bi-eye-slash-fill"></i>
                     </button>
@@ -72,14 +72,11 @@ if (isset($_GET['smes_type'])) {
 
             <span class="text-success m-1" style="font-size: 13px;">Already have an account? <a href="index.php">Login</a></span>
             <div class="mt-3 d-flex justify-content-center">
+                <input type="hidden" id="smesType" value="<?= $smesType ?>">
                 <button type="submit" class="btn btn-success m-1">Signup</button>
             </div>
         </form>
 <?php
-    } elseif ($smesType == 'seller') {
-        echo 'Seller Form';
-    } elseif ($smesType == 'restaurant') {
-        echo 'Resto Form';
     } else {
         pleaseSelectAccountType();
     }
