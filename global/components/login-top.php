@@ -20,4 +20,6 @@ $db = new global_class();
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 </head>
 
+<alert class="alert"></alert>
+
 <body class="pt-5 bg-success">

@@ -4,8 +4,16 @@ if (isset($_SESSION['smes_id'])) {
     if (isset($_SESSION['smes_type'])) {
         $checkSmesId = $db->checkSmesId($_SESSION['smes_type'], $_SESSION['smes_id']);
         if ($checkSmesId->num_rows > 0) {
-            header("Location: dashboard.php");
-            exit();
+            if ($_SESSION['smes_type'] == 'accommodation') {
+                header("Location: SMEs/accommodation/index.php");
+                exit();
+            } elseif ($_SESSION['smes_type'] == 'seller') {
+                header("Location: SMEs/seller/index.php");
+                exit();
+            } elseif ($_SESSION['smes_type'] == 'restaurant') {
+                header("Location: SMEs/restaurant/index.php");
+                exit();
+            }
         }
     }
 }

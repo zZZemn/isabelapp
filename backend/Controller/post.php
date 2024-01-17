@@ -28,7 +28,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $user = $loginResult->fetch_assoc();
                         if (password_verify($password, $user['PASSWORD'])) {
                             session_start();
-                            $_SESSION['smes_id'] = $user['ID'];
+                            if ($_POST['smesType'] == 'accommodation') {
+                                $_SESSION['smes_id'] = $user['ACCOM_ID'];
+                            } elseif ($_POST['smesType'] == 'seller') {
+                                $_SESSION['smes_id'] = $user['SELLER_ID'];
+                            } elseif ($_POST['smesType'] == 'restaurant') {
+                                $_SESSION['smes_id'] = $user['RESTO_ID'];
+                            } else {
+                                $_SESSION['smes_id'] = '404';
+                            }
                             $_SESSION['smes_type'] = $_POST['smesType'];
                             echo 200;
                         } else {
@@ -42,7 +50,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }
             }
         } elseif ($_POST['SubmitType'] == 'SMEsSignUp') {
-            echo $db->SMEsSignup($_POST['smesType'], $_POST['name'], $_POST['address'], $_POST['username'], $_POST['password']);
+            $table = $_POST['smesType'];
+            $smesId = $table . '-' . str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
+            $checkSmesId = $db->checkSmesId($table, $smesId);
+            while ($checkSmesId->num_rows > 0) {
+                $smesId = $table . '-' . str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
+                $checkSmesId = $db->checkSmesId($table, $smesId);
+            }
+
+            $signup = $db->SMEsSignup($smesId, $_POST['smesType'], $_POST['name'], $_POST['address'], $_POST['username'], $_POST['password']);
+            if ($signup == 200) {
+                session_start();
+                $_SESSION['smes_id'] = $smesId;
+                $_SESSION['smes_type'] = $_POST['smesType'];
+            }
+
+            echo $signup;
         }
     }
 }

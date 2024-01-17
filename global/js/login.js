@@ -1,4 +1,11 @@
 $(document).ready(function () {
+  const showAlert = (alertType, text) => {
+    $(".alert").addClass(alertType).text(text);
+    setTimeout(() => {
+      $(".alert").removeClass(alertType).text("");
+    }, 1000);
+  };
+
   var isPasswordShow = false;
   $("#btnShowPassword").click(function (e) {
     e.preventDefault();
@@ -30,7 +37,11 @@ $(document).ready(function () {
         password: password,
       },
       success: function (response) {
-        console.log(response);
+        if (response == "200") {
+          window.location.href = "dashboard.php";
+        } else {
+          showAlert("alert-danger", "Incorrect username or password");
+        }
       },
     });
   });

@@ -13,3 +13,11 @@
   padding: 0px 10px;
   pointer-events: none;
 }
+
+.alert {
+  position: absolute;
+  top: 10px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
