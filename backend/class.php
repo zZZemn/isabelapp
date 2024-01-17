@@ -45,20 +45,32 @@ class global_class extends db_connect
         }
     }
 
+
     public function SMEsSignup($smesId, $table, $name, $address, $username, $password)
     {
-        $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
-
-        if ($table == 'accommodation') {
-            $query = $this->conn->prepare("INSERT INTO `accommodation`(`ACCOM_ID`, `USERNAME`, `PASSWORD`, `ACCOM_NAME`, `ADDRESS`, `STATUS`) VALUES ('$smesId', '$username', '$passwordHashed', '$name', '$address', '2')");
-        } elseif ($table == 'seller') {
-            $query = $this->conn->prepare("INSERT INTO `seller`(`SELLER_ID`, `USERNAME`, `PASSWORD`, `STORE_NAME`, `ADDRESS`, `STATUS`) VALUES ('$smesId', '$username', '$passwordHashed', '$name', '$address', '2')");
-        } elseif ($table == 'restaurant') {
-            $query = $this->conn->prepare("INSERT INTO `restaurant`(`RESTO_ID`, `USERNAME`, `PASSWORD`, `RESTO_NAME`, `ADDRESS`, `STATUS`) VALUES ('$smesId', '$username', '$passwordHashed', '$name', '$address', '2')");
+        $checkUsername = $this->conn->prepare("SELECT * FROM `$table` WHERE `USERNAME` = '$username'");
+        if ($checkUsername->execute()) {
+            $usernameCheck = $checkUsername->get_result();
+            if ($usernameCheck->num_rows > 0) {
+                return 'Username is already existing!';
+            }
         } else {
             return 400;
         }
 
+        $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
+
+        if ($table == 'accommodation') {
+            $sql = "INSERT INTO `accommodation`(`ACCOM_ID`, `USERNAME`, `PASSWORD`, `ACCOM_NAME`, `ADDRESS`, `STATUS`) VALUES ('$smesId', '$username', '$passwordHashed', '$name', '$address', '2')";
+        } elseif ($table == 'seller') {
+            $sql = "INSERT INTO `seller`(`SELLER_ID`, `USERNAME`, `PASSWORD`, `STORE_NAME`, `ADDRESS`, `STATUS`) VALUES ('$smesId', '$username', '$passwordHashed', '$name', '$address', '2')";
+        } elseif ($table == 'restaurant') {
+            $sql = "INSERT INTO `restaurant`(`RESTO_ID`, `USERNAME`, `PASSWORD`, `RESTO_NAME`, `ADDRESS`, `STATUS`) VALUES ('$smesId', '$username', '$passwordHashed', '$name', '$address', '2')";
+        } else {
+            return 400;
+        }
+
+        $query = $this->conn->prepare($sql);
         if ($query->execute()) {
             return 200;
         }

@@ -15,9 +15,10 @@
 }
 
 .alert {
-  position: absolute;
+  position: fixed;
   top: 10px;
   margin-left: 50%;
   transform: translateX(-50%);
   pointer-events: none;
+  z-index: 100000;
 }

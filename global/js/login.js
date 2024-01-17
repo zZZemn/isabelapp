@@ -63,7 +63,11 @@ $(document).ready(function () {
         password: password,
       },
       success: function (response) {
-        console.log(response);
+        if (response == "200") {
+          window.location.reload();
+        } else {
+          showAlert("alert-danger", "Incorrect username or password");
+        }
       },
     });
   });

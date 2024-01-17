@@ -1,4 +1,11 @@
 $(document).ready(function () {
+  const showAlert = (alertType, text) => {
+    $(".alert").addClass(alertType).text(text);
+    setTimeout(() => {
+      $(".alert").removeClass(alertType).text("");
+    }, 1000);
+  };
+
   $("#frmSMEsSignUp").submit(function (e) {
     e.preventDefault();
     var name = $("#smesName").val();
@@ -20,6 +27,13 @@ $(document).ready(function () {
       },
       success: function (response) {
         console.log(response);
+        if (response == "200") {
+          window.location.reload();
+        } else if (response == "Username is already existing!") {
+          showAlert("alert-danger", response);
+        } else {
+          showAlert("alert-danger", "Signup Failed!");
+        }
       },
     });
   });
