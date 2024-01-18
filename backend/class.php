@@ -181,4 +181,22 @@ class global_class extends db_connect
             return 200;
         }
     }
+
+    // Seller
+    public function editSellerDetails($post)
+    {
+        $id = $post['sellerId'];
+        $name = $post['sellerName'];
+        $address = $post['sellerAddress'];
+        $map = $post['sellerMap'];
+        $email = $post['sellerEmail'];
+        $contactNo = $post['sellerContactNo'];
+        $fb = $post['sellerFB'];
+        $ig = $post['sellerIG'];
+
+        $query = $this->conn->prepare("UPDATE `seller` SET `STORE_NAME`='$name',`ADDRESS`='$address',`MAP`='$map',`EMAIL`='$email',`CONTACT_NO`='$contactNo',`FACEBOOK_LINK`='$fb',`INSTAGRAM_LINK`='$ig',`STATUS`='1' WHERE `SELLER_ID` = '$id'");
+        if ($query->execute()) {
+            return 200;
+        }
+    }
 }

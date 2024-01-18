@@ -70,6 +70,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo $db->editAccomDetails($_POST);
         } elseif ($_POST['SubmitType'] == 'EditRestoDetails') {
             echo $db->editRestoDetails($_POST);
+        } elseif ($_POST['SubmitType'] == 'EditSellerDetails') {
+            echo $db->editSellerDetails($_POST);
         } elseif ($_POST['SubmitType'] == 'SMEsUploadNewImage') {
             echo $db->uploadSMEsImage($_POST['ID'], $_FILES['accomImage']);
         } elseif ($_POST['SubmitType'] == 'DeleteSMEsImage') {
