@@ -162,4 +162,23 @@ class global_class extends db_connect
             return 200;
         }
     }
+
+    // Resto
+    public function editRestoDetails($post)
+    {
+        $id = $post['restoId'];
+        $name = $post['restoName'];
+        $description = $post['restoDescription'];
+        $address = $post['restoAddress'];
+        $map = $post['restoMap'];
+        $email = $post['restoEmail'];
+        $contactNo = $post['restoContactNo'];
+        $fb = $post['restoFB'];
+        $ig = $post['restoIG'];
+
+        $query = $this->conn->prepare("UPDATE `restaurant` SET `RESTO_NAME`='$name',`ADDRESS`='$address',`MAP`='$map',`DESCRIPTION`='$description',`EMAIL`='$email',`CONTACT_NO`='$contactNo',`FACEBOOK_LINK`='$fb',`INSTAGRAM_LINK`='$ig',`STATUS`='1' WHERE `RESTO_ID` = '$id'");
+        if ($query->execute()) {
+            return 200;
+        }
+    }
 }

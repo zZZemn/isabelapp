@@ -149,7 +149,7 @@ include('components/header.php');
             <form id="frmUploadImage">
                 <div class="modal-body">
                     <input type="hidden" value="SMEsUploadNewImage" name="SubmitType" id="accomId">
-                    <input type="hidden" value="<?= $accom['ACCOM_ID'] ?>" name="accomId" id="accomId">
+                    <input type="hidden" value="<?= $accom['ACCOM_ID'] ?>" name="ID" id="accomId">
                     <div class="">
                         <label for="accomImage" style="margin-left: 5px;">Upload Here:</label>
                         <input type="file" class="form-control mt-1" name="accomImage" id="accomImage" required accept="image/*">
