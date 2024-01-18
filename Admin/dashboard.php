@@ -1,1 +1,7 @@
-<a href="../process/logout.php">Logout</a>
+<?php
+include('components/header.php');
+?>
+
+
+<?php
+include('components/footer.php');
