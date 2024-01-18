@@ -75,6 +75,12 @@
   font-weight: 400;
 }
 
+.logout-container {
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+}
+
 /* Main */
 main {
   position: absolute;

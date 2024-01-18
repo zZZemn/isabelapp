@@ -50,5 +50,8 @@ $db = new global_class();
                 </ul>
             </li>
         </ul>
+        <div class="logout-container text-center mt-5">
+            <a href="../process/logout.php" class="btn btn-light"><i class="bi bi-box-arrow-left"></i> Logout</a>
+        </div>
     </aside>
     <main class="p-3">
