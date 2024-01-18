@@ -76,6 +76,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo $db->uploadSMEsImage($_POST['ID'], $_FILES['accomImage']);
         } elseif ($_POST['SubmitType'] == 'DeleteSMEsImage') {
             echo $db->deleteSMEsImage($_POST['id'], $_POST['fileName']);
+        } elseif ($_POST['SubmitType'] == 'SMEsAddNewProduct') {
+            echo $db->addNewProduct($_POST['ID'], $_POST['productName'], $_FILES['productImage']);
+        } elseif ($_POST['SubmitType'] == 'DeleteProduct') {
+            echo $db->deleteProduct($_POST['id'], $_POST['img']);
         }
     }
 }

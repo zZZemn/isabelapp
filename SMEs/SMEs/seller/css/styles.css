@@ -1,8 +1,10 @@
-.image-main-container {
+.image-main-container,
+.products-container {
   position: relative;
 }
 
-.btn-add-new-img {
+.btn-add-new-img,
+.btn-add-new-prod {
   position: absolute;
   top: 0;
   right: 0;
@@ -24,5 +26,9 @@
   position: absolute;
   top: 5px;
   right: 5px;
+  font-size: 12px;
+}
+
+.btnDeleteProduct {
   font-size: 12px;
 }

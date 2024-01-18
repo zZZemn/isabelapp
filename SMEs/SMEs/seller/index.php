@@ -80,6 +80,36 @@ include('components/header.php');
             ?>
         </div>
     </div>
+    <hr>
+    <div class="products-container">
+        <button id="addNewProduct" class="btn btn-success btn-add-new-prod"><i class="bi bi-plus-lg"></i> New Product</button>
+        <h5>
+            <center>Products</center>
+        </h5>
+        <div class="mt-5">
+            <?php
+            $getProducts = $db->getProducts($seller['SELLER_ID']);
+            if ($getProducts->num_rows > 0) {
+                while ($product = $getProducts->fetch_assoc()) {
+            ?>
+                    <hr>
+                    <div class="container">
+                        <button class="btn btn-danger btnDeleteProduct" data-id="<?= $product['PRODUCT_ID'] ?>" data-filename="<?= $product['PRODUCT_IMG'] ?>"><i class="bi bi-trash"></i> Delete</button>
+                        <div class="text-center">
+                            <img src="../../../backend/products-img/<?= $product['PRODUCT_IMG'] ?>" style="max-height: 150px; max-width: 150px">
+                            <h6><?= $product['PRODUCT_NAME'] ?></h6>
+                        </div>
+                    </div>
+                <?php
+                }
+            } else {
+                ?>
+                <center class="text-danger">No Products Provided</center>
+            <?php
+            }
+            ?>
+        </div>
+    </div>
 </div>
 
 <!-- Edit Modal -->
@@ -130,8 +160,9 @@ include('components/header.php');
         </div>
     </div>
 </div>
-
 <!-- End of Edit Modal -->
+
+<!-- Add Image Modal -->
 <div class="modal" tabindex="-1" role="dialog" id="AddImageModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -155,8 +186,38 @@ include('components/header.php');
         </div>
     </div>
 </div>
-<!-- Add Image Modal -->
 <!-- End of Add Image Modal -->
+
+<!-- Add Product Modal -->
+<div class="modal" tabindex="-1" role="dialog" id="AddProductModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="bi bi-shop"></i> New Product</h5>
+            </div>
+            <form id="frmAddNewProduct">
+                <div class="modal-body">
+                    <input type="hidden" value="SMEsAddNewProduct" name="SubmitType">
+                    <input type="hidden" value="<?= $seller['SELLER_ID'] ?>" name="ID" id="sellerId">
+                    <div class="">
+                        <label for="productImage" style="margin-left: 5px;">Upload Product Image Here:</label>
+                        <input type="file" class="form-control mt-1" name="productImage" id="productImage" required accept="image/*">
+                    </div>
+                    <hr>
+                    <div class="">
+                        <label for="productName" style="margin-left: 5px;">Product Name:</label>
+                        <input type="text" class="form-control mt-1" name="productName" id="productName" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="reset" class="btn btn-secondary btnCloseModal" id="btnCloseModal" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- End of Add Product Modal -->
 
 <?php
 include('components/footer.php');

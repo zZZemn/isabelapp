@@ -139,7 +139,6 @@ class global_class extends db_connect
             }
         } else {
             echo "File does not exist.";
-            echo $fileToDelete;
         }
     }
 
@@ -197,6 +196,73 @@ class global_class extends db_connect
         $query = $this->conn->prepare("UPDATE `seller` SET `STORE_NAME`='$name',`ADDRESS`='$address',`MAP`='$map',`EMAIL`='$email',`CONTACT_NO`='$contactNo',`FACEBOOK_LINK`='$fb',`INSTAGRAM_LINK`='$ig',`STATUS`='1' WHERE `SELLER_ID` = '$id'");
         if ($query->execute()) {
             return 200;
+        }
+    }
+
+    public function getProducts($sellerId)
+    {
+        $query = $this->conn->prepare("SELECT * FROM `products` WHERE `SELLER_ID` = '$sellerId'");
+        if ($query->execute()) {
+            $result = $query->get_result();
+            return $result;
+        }
+    }
+
+    public function getProducById($productId)
+    {
+        $query = $this->conn->prepare("SELECT * FROM `products` WHERE `PRODUCT_ID` = '$productId'");
+        if ($query->execute()) {
+            $result = $query->get_result();
+            return $result;
+        }
+    }
+
+    public function addNewProduct($id, $name, $file)
+    {
+        $productId = 'PRO-' . str_pad(rand(0, 9999999999), 10, '0', STR_PAD_LEFT);
+        $checkProductId = $this->getProducById($productId);
+        while ($checkProductId->num_rows > 0) {
+            $productId = 'PRO-' . str_pad(rand(0, 9999999999), 10, '0', STR_PAD_LEFT);
+            $checkProductId = $this->getProducById($productId);
+        }
+
+        if (!empty($_FILES['productImage']['size'])) {
+            $file_name = $file['name'];
+            $file_tmp = $file['tmp_name'];
+            $extension = pathinfo($file_name, PATHINFO_EXTENSION);
+            $destinationDirectory = __DIR__ . '../products-img/';
+            $newFileName = $productId . '.' . $extension;
+            $destination = $destinationDirectory . $newFileName;
+            if (is_uploaded_file($file_tmp)) {
+                if (move_uploaded_file($file_tmp, $destination)) {
+                    $query = $this->conn->prepare("INSERT INTO `products`(`PRODUCT_ID`, `SELLER_ID`, `PRODUCT_NAME`, `PRODUCT_IMG`, `STATUS`) VALUES ('$productId','$id','$name','$newFileName','1')");
+                    if ($query->execute()) {
+                        return 200;
+                    }
+                } else {
+                    return $destination;
+                }
+            } else {
+                return "Error: File upload failed or file not found.";
+            }
+        } else {
+            return 'File is empty';
+        }
+    }
+
+    public function deleteProduct($id, $img)
+    {
+        $fileToDelete = __DIR__ . '/products-img/' . $img;
+        $query = $this->conn->prepare("DELETE FROM `products` WHERE `PRODUCT_ID` = '$id'");
+        if (file_exists($fileToDelete)) {
+            if (unlink($fileToDelete) && $query->execute()) {
+                return 200;
+            } else {
+                echo "Error deleting the file.";
+            }
+        } else {
+            echo "File does not exist.";
+            echo $fileToDelete;
         }
     }
 }

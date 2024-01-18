@@ -97,4 +97,60 @@ $(document).ready(function () {
       },
     });
   });
+
+  $("#addNewProduct").click(function (e) {
+    e.preventDefault();
+    $("#AddProductModal").modal("show");
+  });
+
+  $("#frmAddNewProduct").submit(function (e) {
+    e.preventDefault();
+    var formData = new FormData($(this)[0]);
+
+    $.ajax({
+      type: "POST",
+      url: "../../../backend/Controller/post.php",
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (response) {
+        console.log(response);
+        closeModal();
+        if (response == "200") {
+          showAlert("alert-success", "Product Added!");
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
+        } else {
+          showAlert("alert-danger", "Uploading Failed!");
+        }
+      },
+    });
+  });
+
+  $(".btnDeleteProduct").click(function (e) {
+    e.preventDefault();
+
+    $.ajax({
+      type: "POST",
+      url: "../../../backend/Controller/post.php",
+      data: {
+        SubmitType: "DeleteProduct",
+        id: $(this).data("id"),
+        img: $(this).data("filename"),
+      },
+      success: function (response) {
+        console.log(response);
+        closeModal();
+        if (response == "200") {
+          showAlert("alert-success", "Product Deleted!");
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
+        } else {
+          showAlert("alert-danger", "Deleting Failed!");
+        }
+      },
+    });
+  });
 });
