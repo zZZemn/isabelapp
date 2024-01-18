@@ -68,6 +68,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo $signup;
         } elseif ($_POST['SubmitType'] == 'EditAccomDetails') {
             echo $db->editAccomDetails($_POST);
+        } elseif ($_POST['SubmitType'] == 'SMEsUploadNewImage') {
+            echo $db->uploadSMEsImage($_POST['accomId'], $_FILES['accomImage']);
+        } elseif ($_POST['SubmitType'] == 'DeleteSMEsImage') {
+            echo $db->deleteSMEsImage($_POST['id'], $_POST['fileName']);
         }
     }
 }

@@ -40,4 +40,59 @@ $(document).ready(function () {
       },
     });
   });
+
+  $("#addNewImage").click(function (e) {
+    e.preventDefault();
+    $("#AddImageModal").modal("show");
+  });
+
+  $("#frmUploadImage").submit(function (e) {
+    e.preventDefault();
+    var formData = new FormData($(this)[0]);
+    $.ajax({
+      type: "POST",
+      url: "../../../backend/Controller/post.php",
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (response) {
+        closeModal();
+        if (response == "200") {
+          showAlert("alert-success", "Image Uploaded!");
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
+        } else {
+          showAlert("alert-danger", "Uploading Failed!");
+        }
+      },
+    });
+  });
+
+  $(".btnDeleteImg").click(function (e) {
+    e.preventDefault();
+    console.log($(this).data("id"));
+    console.log($(this).data("filename"));
+    $.ajax({
+      type: "POST",
+      url: "../../../backend/Controller/post.php",
+      data: {
+        SubmitType: "DeleteSMEsImage",
+        id: $(this).data("id"),
+        fileName: $(this).data("filename"),
+      },
+      success: function (response) {
+        console.log(response);
+        closeModal();
+        if (response == "200") {
+          showAlert("alert-success", "Image Deleted!");
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
+        } else {
+          showAlert("alert-danger", "Deleting Failed!");
+        }
+      },
+    });
+  });
 });

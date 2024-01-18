@@ -85,6 +85,64 @@ class global_class extends db_connect
         }
     }
 
+    public function checkSMEsImgFileName($name)
+    {
+        $query = $this->conn->prepare("SELECT * FROM `smes_img` WHERE `FILE_NAME` = '$name'");
+        if ($query->execute()) {
+            $result = $query->get_result();
+            return $result;
+        }
+    }
+
+    public function uploadSMEsImage($id, $file)
+    {
+        $fileName = 'SMESIMG-' . str_pad(rand(0, 9999999999), 10, '0', STR_PAD_LEFT);
+        $checkFileName = $this->checkSMEsImgFileName($fileName);
+        while ($checkFileName->num_rows > 0) {
+            $fileName = 'SMESIMG-' . str_pad(rand(0, 9999999999), 10, '0', STR_PAD_LEFT);
+            $checkFileName = $this->checkSMEsImgFileName($fileName);
+        }
+
+        if (!empty($_FILES['accomImage']['size'])) {
+            $file_name = $file['name'];
+            $file_tmp = $file['tmp_name'];
+            $extension = pathinfo($file_name, PATHINFO_EXTENSION);
+            $destinationDirectory = __DIR__ . '../SMEsImg/';
+            $newFileName = $fileName . '.' . $extension;
+            $destination = $destinationDirectory . $newFileName;
+            if (is_uploaded_file($file_tmp)) {
+                if (move_uploaded_file($file_tmp, $destination)) {
+                    $query = $this->conn->prepare("INSERT INTO `smes_img`(`SMES_ID`, `FILE_NAME`) VALUES ('$id','$newFileName')");
+                    if ($query->execute()) {
+                        return 200;
+                    }
+                } else {
+                    return $destination;
+                }
+            } else {
+                return "Error: File upload failed or file not found.";
+            }
+        } else {
+            return 'File is empty';
+        }
+    }
+
+    public function deleteSMEsImage($id, $fileName)
+    {
+        $fileToDelete = __DIR__ . '/SMEsImg/' . $fileName;
+        $query = $this->conn->prepare("DELETE FROM `smes_img` WHERE `ID` = '$id'");
+        if (file_exists($fileToDelete)) {
+            if (unlink($fileToDelete) && $query->execute()) {
+                return 200;
+            } else {
+                echo "Error deleting the file.";
+            }
+        } else {
+            echo "File does not exist.";
+            echo $fileToDelete;
+        }
+    }
+
 
     // Accommodation
     public function editAccomDetails($post)
@@ -99,7 +157,7 @@ class global_class extends db_connect
         $fb = $post['accomFB'];
         $ig = $post['accomIG'];
 
-        $query = $this->conn->prepare("UPDATE `accommodation` SET `ACCOM_NAME`='$name',`ADDRESS`='$address',`MAP`='$map',`DESCRIPTION`='$description',`EMAIL`='$email',`CONTACT_NO`='$contactNo',`FACEBOOK_LINK`='$fb',`INSTAGRAM_LINK`='$id',`STATUS`='1' WHERE `ACCOM_ID` = '$id'");
+        $query = $this->conn->prepare("UPDATE `accommodation` SET `ACCOM_NAME`='$name',`ADDRESS`='$address',`MAP`='$map',`DESCRIPTION`='$description',`EMAIL`='$email',`CONTACT_NO`='$contactNo',`FACEBOOK_LINK`='$fb',`INSTAGRAM_LINK`='$ig',`STATUS`='1' WHERE `ACCOM_ID` = '$id'");
         if ($query->execute()) {
             return 200;
         }
