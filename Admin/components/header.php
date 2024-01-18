@@ -22,3 +22,33 @@ $db = new global_class();
 <alert class="alert"></alert>
 
 <body class="">
+    <button class="btn" id="btnOpenNav">
+        <i class="bi bi-list"></i>
+    </button>
+    <aside class="side-nav bg-success ">
+        <button class="btn" id="btnCloseNav">
+            <i class="bi bi-x-lg"></i>
+        </button>
+        <div class="text-center mt-3 mb-3">
+            <a href="dashboard.php" class="logo">
+                <img src="../assets/system-img/logo.png">
+            </a>
+        </div>
+        <ul class="list-group nav-ul">
+            <li><a href="dashboard.php" class="nav-dashboard"><i class="bi bi-clipboard-check-fill"></i> Dashboard</a></li>
+            <li><a href="#" class="nav-accounts"><i class="bi bi-people-fill"></i> Accounts Sign in</a></li>
+            <li><a href="#" class="nav-ratings"><i class="bi bi-hand-thumbs-up-fill"></i> Ratings & Reviews</a></li>
+            <li class="li-manage">
+                <a href="#" id="btnManage" class="nav-manage"><i class="bi bi-kanban"></i> Manage</a>
+                <ul class="list-group ul-manage mt-5">
+                    <li><a href="#" class="nav-news"><i class="bi bi-newspaper"></i> News Update</a></li>
+                    <li><a href="#" class="nav-accom"><i class="bi bi-building"></i> Accommodation</a></li>
+                    <li><a href="#" class="nav-products"><i class="bi bi-shop"></i> Products</a></li>
+                    <li><a href="#" class="nav-spots"><i class="bi bi-card-image"></i> Tourist Spot</a></li>
+                    <li><a href="#" class="nav-resto"><i class="bi bi-egg-fried"></i> Restaurant</a></li>
+                    <li><a href="#" class="nav-contact"><i class="bi bi-telephone-fill"></i> Contact</a></li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+    <main class="p-3">
