@@ -31,8 +31,8 @@
 }
 
 .logo img {
-  height: 80px;
-  width: 80px;
+  height: 100px;
+  width: 100px;
 }
 
 .nav-ul li {
@@ -96,6 +96,17 @@ main {
 
 .side-nav-close {
   transform: translateX(-100%);
+}
+
+/* All */
+.table-container {
+  max-height: 89vh;
+  overflow: auto;
+}
+
+.table-header {
+  position: sticky;
+  top: 0;
 }
 
 @media only screen and (max-width: 800px) {

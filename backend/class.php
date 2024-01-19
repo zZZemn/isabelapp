@@ -162,6 +162,15 @@ class global_class extends db_connect
         }
     }
 
+    public function getAccommodations()
+    {
+        $query = $this->conn->prepare("SELECT * FROM `accommodation`");
+        if ($query->execute()) {
+            $result = $query->get_result();
+            return $result;
+        }
+    }
+
     // Resto
     public function editRestoDetails($post)
     {
@@ -178,6 +187,15 @@ class global_class extends db_connect
         $query = $this->conn->prepare("UPDATE `restaurant` SET `RESTO_NAME`='$name',`ADDRESS`='$address',`MAP`='$map',`DESCRIPTION`='$description',`EMAIL`='$email',`CONTACT_NO`='$contactNo',`FACEBOOK_LINK`='$fb',`INSTAGRAM_LINK`='$ig',`STATUS`='1' WHERE `RESTO_ID` = '$id'");
         if ($query->execute()) {
             return 200;
+        }
+    }
+
+    public function getResto()
+    {
+        $query = $this->conn->prepare("SELECT * FROM `restaurant`");
+        if ($query->execute()) {
+            $result = $query->get_result();
+            return $result;
         }
     }
 
@@ -263,6 +281,15 @@ class global_class extends db_connect
         } else {
             echo "File does not exist.";
             echo $fileToDelete;
+        }
+    }
+
+    public function getSellers()
+    {
+        $query = $this->conn->prepare("SELECT * FROM `seller`");
+        if ($query->execute()) {
+            $result = $query->get_result();
+            return $result;
         }
     }
 }
