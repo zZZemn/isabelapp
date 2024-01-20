@@ -132,5 +132,87 @@ $(document).ready(function () {
   });
   // End of Contact
 
+  // News
+  $(".btnDeleteNews").click(function (e) {
+    e.preventDefault();
+    var id = $(this).data("id");
+    $.ajax({
+      type: "POST",
+      url: "../backend/Controller/post.php",
+      data: {
+        SubmitType: "DeleteNews",
+        id: id,
+      },
+      success: function (response) {
+        if (response == "200") {
+          showAlert("alert-success", "News Deleted!");
+          window.location.reload();
+        } else {
+          showAlert("alert-danger", "Failed to delete a news.");
+        }
+      },
+    });
+  });
+
+  $("#btnAddNews").click(function (e) {
+    e.preventDefault();
+    $("#newsAddNewsModal").modal("show");
+  });
+
+  $("#newsFrmAddNews").submit(function (e) {
+    e.preventDefault();
+    var formData = $(this).serialize();
+    $.ajax({
+      type: "POST",
+      url: "../backend/Controller/post.php",
+      data: formData,
+      success: function (response) {
+        closeModal();
+        if (response == "200") {
+          showAlert("alert-success", "News Added!");
+          window.location.reload();
+        } else {
+          showAlert("alert-danger", "Failed to add a news.");
+        }
+      },
+    });
+  });
+
+  $(".btnEditNews").click(function (e) {
+    e.preventDefault();
+    $("#newsId").val($(this).data("id"));
+    $("#EditNewsName").val($(this).data("name"));
+    $("#EditNewsDescription").val($(this).data("description"));
+    $("#EditNewsAddress").val($(this).data("address"));
+    $("#EditNewsMap").val($("#" + $(this).data("id")).val());
+    $("#EditNewsDate").val($(this).data("date"));
+    $("#EditNewsTime").val($(this).data("time"));
+
+    $("#MapPrev").html($("#" + $(this).data("id")).val());
+
+    $("#newsEditNewsModal").modal("show");
+  });
+
+  $("#newsFrmEditNews").submit(function (e) {
+    e.preventDefault();
+    var formData = $(this).serialize();
+    $.ajax({
+      type: "POST",
+      url: "../backend/Controller/post.php",
+      data: formData,
+      success: function (response) {
+        closeModal();
+        if (response == "200") {
+          showAlert("alert-success", "News Edited!");
+          window.location.reload();
+        } else {
+          showAlert("alert-danger", "Failed to edit a news.");
+        }
+      },
+    });
+  });
+
+  // End of News
+
   screenSize();
 });

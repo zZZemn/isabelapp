@@ -42,7 +42,7 @@ $db = new global_class();
             <li class="li-manage">
                 <a href="#" id="btnManage" class="nav-manage"><i class="bi bi-kanban"></i> Manage</a>
                 <ul class="list-group ul-manage mt-5">
-                    <li><a href="#" class="nav-news"><i class="bi bi-newspaper"></i> News Update</a></li>
+                    <li><a href="news.php" class="nav-news"><i class="bi bi-newspaper"></i> News Update</a></li>
                     <li><a href="accommodation.php" class="nav-accom"><i class="bi bi-building"></i> Accommodation</a></li>
                     <li><a href="store.php" class="nav-products"><i class="bi bi-shop"></i> Products</a></li>
                     <li><a href="#" class="nav-spots"><i class="bi bi-card-image"></i> Tourist Spot</a></li>

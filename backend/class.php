@@ -327,4 +327,54 @@ class global_class extends db_connect
             return 200;
         }
     }
+
+    // News
+    public function getNews()
+    {
+        $query = $this->conn->prepare("SELECT * FROM `news`");
+        if ($query->execute()) {
+            $result = $query->get_result();
+            return $result;
+        }
+    }
+
+    public function getNewsUsingId($id)
+    {
+        $query = $this->conn->prepare("SELECT * FROM `news` WHERE `NEWS_ID` = '$id'");
+        if ($query->execute()) {
+            $result = $query->get_result();
+            return $result;
+        }
+    }
+
+    public function deleteNews($id)
+    {
+        $query = $this->conn->prepare("DELETE FROM `news` WHERE `NEWS_ID` = '$id'");
+        if ($query->execute()) {
+            return 200;
+        }
+    }
+
+    public function addNews($post)
+    {
+        $newsId = 'NEWS-' . str_pad(rand(0, 9999999999), 10, '0', STR_PAD_LEFT);
+        $checkNews = $this->getNewsUsingId($newsId);
+        while ($checkNews->num_rows > 0) {
+            $newsId = 'NEWS-' . str_pad(rand(0, 9999999999), 10, '0', STR_PAD_LEFT);
+            $checkNews = $this->getNewsUsingId($newsId);
+        }
+
+        $query = $this->conn->prepare("INSERT INTO `news`(`NEWS_ID`, `EVENT_NAME`, `ADDRESS`, `MAP`, `DESCRIPTION`, `DATE`, `TIME`, `STATUS`) VALUES ('$newsId','" . $post['newsName'] . "','" . $post['newsAddress'] . "','" . $post['newsMap'] . "','" . $post['newsDescription'] . "','" . $post['newsDate'] . "','" . $post['newsTime'] . "','1')");
+        if ($query->execute()) {
+            return 200;
+        }
+    }
+
+    public function editNews($post)
+    {
+        $query = $this->conn->prepare("UPDATE `news` SET `EVENT_NAME`='" . $post['EditNewsName'] . "',`ADDRESS`='" . $post['EditNewsAddress'] . "',`MAP`='" . $post['EditNewsMap'] . "',`DESCRIPTION`='" . $post['EditNewsDescription'] . "',`DATE`='" . $post['EditNewsDate'] . "',`TIME`='" . $post['EditNewsTime'] . "' WHERE `NEWS_ID` = '" . $post['newsId'] . "'");
+        if ($query->execute()) {
+            return 200;
+        }
+    }
 }

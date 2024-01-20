@@ -86,6 +86,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo $db->deleteContact($_POST['id']);
         } elseif ($_POST['SubmitType'] == 'EditContact') {
             echo $db->editContact($_POST['editHotlineId'], $_POST['EditContactName'], $_POST['EditContactNo']);
+        } elseif ($_POST['SubmitType'] == 'DeleteNews') {
+            echo $db->deleteNews($_POST['id']);
+        } elseif ($_POST['SubmitType'] == 'AddNewsUpdate') {
+            echo $db->addNews($_POST);
+        } elseif ($_POST['SubmitType'] == 'EditNews') {
+            echo $db->editNews($_POST);
         }
     }
 }
