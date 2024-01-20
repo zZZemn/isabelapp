@@ -410,4 +410,14 @@ class global_class extends db_connect
             return 'File is empty';
         }
     }
+
+    // Tourist Spot
+    public function getTouristSpot()
+    {
+        $query = $this->conn->prepare("SELECT * FROM `tourist_spot`");
+        if ($query->execute()) {
+            $result = $query->get_result();
+            return $result;
+        }
+    }
 }

@@ -45,7 +45,7 @@ $db = new global_class();
                     <li><a href="news.php" class="nav-news"><i class="bi bi-newspaper"></i> News Update</a></li>
                     <li><a href="accommodation.php" class="nav-accom"><i class="bi bi-building"></i> Accommodation</a></li>
                     <li><a href="store.php" class="nav-products"><i class="bi bi-shop"></i> Products</a></li>
-                    <li><a href="#" class="nav-spots"><i class="bi bi-card-image"></i> Tourist Spot</a></li>
+                    <li><a href="tourist-spot.php" class="nav-spots"><i class="bi bi-card-image"></i> Tourist Spot</a></li>
                     <li><a href="restaurant.php" class="nav-resto"><i class="bi bi-egg-fried"></i> Restaurant</a></li>
                     <li><a href="contact.php" class="nav-contact"><i class="bi bi-telephone-fill"></i> Contact</a></li>
                 </ul>
