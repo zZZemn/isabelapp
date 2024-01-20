@@ -186,19 +186,46 @@
 
 <!-- End of news.php -->
 
-<!-- <div class="modal" tabindex="-1" role="dialog" id="AddImageModal">
+
+<!-- tourist-spot.php -->
+<div class="modal" tabindex="-1" role="dialog" id="tsAddModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title"><i class="bi bi-cloud-arrow-up"></i> New Image</h5>
+                <h5 class="modal-title"><i class="bi bi-card-image"></i> Add Tourist Spot</h5>
             </div>
-            <form id="frmUploadImage">
+            <form id="tsFrmAddTs">
+                <input type="hidden" name="SubmitType" value="AddTouristSpot">
                 <div class="modal-body">
-                    <input type="hidden" value="SMEsUploadNewImage" name="SubmitType" id="accomId">
-                    <input type="hidden" value="" name="ID" id="accomId">
                     <div class="">
-                        <label for="accomImage" style="margin-left: 5px;">Upload Here:</label>
-                        <input type="file" class="form-control mt-1" name="accomImage" id="accomImage" required accept="image/*">
+                        <label for="spotName">Name:</label>
+                        <input type="text" class="form-control mt-1" name="spotName" id="spotName" required>
+                    </div>
+                    <div class="mt-3">
+                        <label for="spotType">Spot Type:</label>
+                        <select id="spotType" class="form-control" required name="spotType">
+                            <option value="Lake">Lake</option>
+                            <option value="Beach">Beach</option>
+                            <option value="Mountain">Mountain</option>
+                            <option value="City View">City View</option>
+                            <option value="River">River</option>
+                        </select>
+                    </div>
+                    <div class="mt-3">
+                        <label for="spotDescription">Description:</label>
+                        <input type="text" class="form-control mt-1" name="spotDescription" id="spotDescription" required>
+                    </div>
+                    <div class="mt-3">
+                        <label for="spotAddress">Address:</label>
+                        <input type="text" class="form-control mt-1" name="spotAddress" id="spotAddress" required>
+                    </div>
+                    <div class="mt-3">
+                        <label for="spotFee">Fee:</label>
+                        <input type="number" class="form-control mt-1" name="spotFee" id="spotFee" required>
+                    </div>
+                    <div class="mt-3">
+                        <label for="spotMap">Map:</label>
+                        <textarea class="form-control mt-1" name="spotMap" id="spotMap" required></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -208,4 +235,5 @@
             </form>
         </div>
     </div>
-</div> -->
+</div>
+<!-- End of tourist-spot.php -->

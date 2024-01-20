@@ -420,4 +420,28 @@ class global_class extends db_connect
             return $result;
         }
     }
+
+    public function getTouristSpotById($id)
+    {
+        $query = $this->conn->prepare("SELECT * FROM `tourist_spot` WHERE `SPOT_ID` = '$id'");
+        if ($query->execute()) {
+            $result = $query->get_result();
+            return $result;
+        }
+    }
+
+    public function addNewSpot($post)
+    {
+        $spotId = 'SPOT-' . str_pad(rand(0, 9999999999), 10, '0', STR_PAD_LEFT);
+        $checkSpot = $this->getTouristSpotById($spotId);
+        while ($checkSpot->num_rows > 0) {
+            $spotId = 'SPOT-' . str_pad(rand(0, 9999999999), 10, '0', STR_PAD_LEFT);
+            $checkSpot = $this->getTouristSpotById($spotId);
+        }
+
+        $query = $this->conn->prepare("INSERT INTO `tourist_spot`(`SPOT_ID`, `SPOT_NAME`, `SPOT_TYPE`, `DESCRIPTION`, `ADDRESS`, `MAP`, `FEE`, `STATUS`) VALUES ('$spotId','" . $post['spotName'] . "','" . $post['spotType'] . "','" . $post['spotDescription'] . "','" . $post['spotAddress'] . "','" . $post['spotMap'] . "','" . $post['spotFee'] . "','1')");
+        if ($query->execute()) {
+            return 200;
+        }
+    }
 }

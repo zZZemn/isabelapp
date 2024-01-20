@@ -272,5 +272,32 @@ $(document).ready(function () {
 
   // End of News
 
+  // Tourist Spot
+  $("#btnAddSpot").click(function (e) {
+    e.preventDefault();
+    $("#tsAddModal").modal("show");
+  });
+
+  $("#tsFrmAddTs").submit(function (e) {
+    e.preventDefault();
+    var formData = $(this).serialize();
+    $.ajax({
+      type: "POST",
+      url: "../backend/Controller/post.php",
+      data: formData,
+      success: function (response) {
+        closeModal();
+        if (response == "200") {
+          showAlert("alert-success", "Spot Added!");
+          window.location.reload();
+        } else {
+          showAlert("alert-danger", "Failed to add a spot.");
+        }
+      },
+    });
+  });
+
+  // End of Tourist Spot
+
   screenSize();
 });

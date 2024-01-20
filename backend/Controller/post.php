@@ -94,6 +94,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo $db->editNews($_POST);
         } elseif ($_POST['SubmitType'] == 'newsUploadImg') {
             echo $db->uploadNewsImage($_POST['id'], $_FILES['newsImg']);
+        } elseif ($_POST['SubmitType'] == 'AddTouristSpot') {
+            echo $db->addNewSpot($_POST);
         }
     }
 }
