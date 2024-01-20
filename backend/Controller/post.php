@@ -102,6 +102,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo $db->uploadSpotImage($_POST['id'], $_FILES['spotImg']);
         } elseif ($_POST['SubmitType'] == 'DeleteSpot') {
             echo $db->deleteSpot($_POST['id']);
+        } elseif ($_POST['SubmitType'] == 'SMEsChangeStatus') {
+            echo $db->changeSMEsStatus($_POST['table'], $_POST['id'], $_POST['newStatus']);
         }
     }
 }

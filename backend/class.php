@@ -27,6 +27,23 @@ class global_class extends db_connect
         }
     }
 
+    public function changeSMEsStatus($table, $id, $newStatus)
+    {
+        if ($table == 'accommodation') {
+            $query = $this->conn->prepare("UPDATE `accommodation` SET `STATUS`='$newStatus' WHERE `ACCOM_ID` = '$id'");
+        } elseif ($table == 'seller') {
+            $query = $this->conn->prepare("UPDATE `seller` SET `STATUS`='$newStatus' WHERE `SELLER_ID` = '$id'");
+        } elseif ($table == 'restaurant') {
+            $query = $this->conn->prepare("UPDATE `restaurant` SET `STATUS`='$newStatus' WHERE `RESTO_ID` = '$id'");
+        } else {
+            return $table;
+        }
+
+        if ($query->execute()) {
+            return 200;
+        }
+    }
+
     public function checkSmesId($smesType, $id)
     {
         if ($smesType == 'accommodation') {

@@ -23,7 +23,9 @@ include("components/header.php");
                     <td><?= $count ?></td>
                     <td><?= $resto['RESTO_NAME'] ?></td>
                     <td><?= $resto['ADDRESS'] ?></td>
-                    <td> <button class="btn btn-dark btn-deactivate-resto" data-id="<?= $resto['RESTO_ID'] ?>"><i class="bi bi-lock-fill"></i> Deactivate</button> </td>
+                    <td>
+                        <button class="btn <?= ($resto['STATUS'] == 1) ? 'btn-dark' : 'btn-success' ?> btn-deactivate-resto" data-newstatus="<?= ($resto['STATUS'] == 1) ? 0 : 1 ?>" data-id="<?= $resto['RESTO_ID'] ?>"><i class="bi bi-lock-fill"></i> <?= ($resto['STATUS'] == 1) ? 'Deactivate' : 'Activate' ?></button>
+                    </td>
                 </tr>
             <?php
                 $count++;

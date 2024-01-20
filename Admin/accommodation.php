@@ -23,7 +23,9 @@ include("components/header.php");
                     <td><?= $count ?></td>
                     <td><?= $accom['ACCOM_NAME'] ?></td>
                     <td><?= $accom['ADDRESS'] ?></td>
-                    <td> <button class="btn btn-dark btn-deactivate-accom" data-id="<?= $accom['ACCOM_ID'] ?>"><i class="bi bi-lock-fill"></i> Deactivate</button> </td>
+                    <td>
+                        <button class="btn <?= ($accom['STATUS'] == 1) ? 'btn-dark' : 'btn-success' ?> btn-deactivate-accom" data-newstatus="<?= ($accom['STATUS'] == 1) ? 0 : 1 ?>" data-id="<?= $accom['ACCOM_ID'] ?>"><i class="bi bi-lock-fill"></i> <?= ($accom['STATUS'] == 1) ? 'Deactivate' : 'Activate' ?></button>
+                    </td>
                 </tr>
             <?php
                 $count++;

@@ -58,6 +58,52 @@ $(document).ready(function () {
     screenSize();
   });
 
+  // SMEs
+  const changeSMEsStatus = (table, id, newstatus) => {
+    $.ajax({
+      type: "POST",
+      url: "../backend/Controller/post.php",
+      data: {
+        SubmitType: "SMEsChangeStatus",
+        table: table,
+        id: id,
+        newStatus: newstatus,
+      },
+      success: function (response) {
+        closeModal();
+        if (response == "200") {
+          showAlert("alert-success", "Status Changed!");
+          window.location.reload();
+        } else {
+          showAlert("alert-danger", "Failed to Change Status");
+        }
+      },
+    });
+  };
+  // Accom
+  $(".btn-deactivate-accom").click(function (e) {
+    e.preventDefault();
+    changeSMEsStatus(
+      "accommodation",
+      $(this).data("id"),
+      $(this).data("newstatus")
+    );
+  });
+
+  $(".btn-deactivate-resto").click(function (e) {
+    e.preventDefault();
+    changeSMEsStatus(
+      "restaurant",
+      $(this).data("id"),
+      $(this).data("newstatus")
+    );
+  });
+
+  $(".btn-deactivate-seller").click(function (e) {
+    e.preventDefault();
+    changeSMEsStatus("seller", $(this).data("id"), $(this).data("newstatus"));
+  });
+
   // Contact
   $("#btnAddNewContact").click(function (e) {
     e.preventDefault();

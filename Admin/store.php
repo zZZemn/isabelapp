@@ -23,7 +23,9 @@ include("components/header.php");
                     <td><?= $count ?></td>
                     <td><?= $seller['STORE_NAME'] ?></td>
                     <td><?= $seller['ADDRESS'] ?></td>
-                    <td> <button class="btn btn-dark btn-deactivate-seller" data-id="<?= $seller['SELLER_ID'] ?>"><i class="bi bi-lock-fill"></i> Deactivate</button> </td>
+                    <td>
+                        <button class="btn <?= ($seller['STATUS'] == 1) ? 'btn-dark' : 'btn-success' ?> btn-deactivate-seller" data-newstatus="<?= ($seller['STATUS'] == 1) ? 0 : 1 ?>" data-id="<?= $seller['SELLER_ID'] ?>"><i class="bi bi-lock-fill"></i> <?= ($seller['STATUS'] == 1) ? 'Deactivate' : 'Activate' ?></button>
+                    </td>
                 </tr>
             <?php
                 $count++;
