@@ -292,4 +292,39 @@ class global_class extends db_connect
             return $result;
         }
     }
+
+    // Contact
+    public function getHotlines()
+    {
+        $query = $this->conn->prepare("SELECT * FROM `hotline`");
+        if ($query->execute()) {
+            $result = $query->get_result();
+            return $result;
+        }
+    }
+
+    public function addNewContact($name, $number)
+    {
+        $query = $this->conn->prepare("INSERT INTO `hotline`(`HOTLINE_NAME`, `NUMBER`) VALUES ('$name', '$number')");
+
+        if ($query->execute()) {
+            return 200;
+        }
+    }
+
+    public function deleteContact($id)
+    {
+        $query = $this->conn->prepare("DELETE FROM `hotline` WHERE `HOTLINE_ID` = '$id'");
+        if ($query->execute()) {
+            return 200;
+        }
+    }
+
+    public function editContact($id, $name, $number)
+    {
+        $query = $this->conn->prepare("UPDATE `hotline` SET `HOTLINE_NAME`='$name',`NUMBER`='$number' WHERE `HOTLINE_ID` = '$id'");
+        if ($query->execute()) {
+            return 200;
+        }
+    }
 }

@@ -1,4 +1,22 @@
 $(document).ready(function () {
+  const showAlert = (alertType, text) => {
+    $(".alert").addClass(alertType).text(text);
+    setTimeout(() => {
+      $(".alert").removeClass(alertType).text("");
+    }, 1000);
+  };
+
+  // Modal
+  const closeModal = () => {
+    $(".modal").modal("hide");
+  };
+
+  $(".btnCloseModal").click(function (e) {
+    e.preventDefault();
+    closeModal();
+  });
+  // End Of Modal
+
   const screenSize = () => {
     var currentWidth = $(window).width();
 
@@ -31,7 +49,6 @@ $(document).ready(function () {
   });
 
   $("#btnCloseNav").click(function (e) {
-    console.log("asdss");
     e.preventDefault();
     $(".side-nav").addClass("side-nav-close");
     $(".side-nav").removeClass("side-nav-open");
@@ -40,6 +57,80 @@ $(document).ready(function () {
   $(window).resize(function () {
     screenSize();
   });
-  
+
+  // Contact
+  $("#btnAddNewContact").click(function (e) {
+    e.preventDefault();
+    $("#contactAddContact").modal("show");
+  });
+
+  $("#contactFrmAddContact").submit(function (e) {
+    e.preventDefault();
+    var formData = $(this).serialize();
+    $.ajax({
+      type: "POST",
+      url: "../backend/Controller/post.php",
+      data: formData,
+      success: function (response) {
+        closeModal();
+        if (response == "200") {
+          showAlert("alert-success", "Contact Added!");
+          window.location.reload();
+        } else {
+          showAlert("alert-danger", "Failed to add a contact.");
+        }
+      },
+    });
+  });
+
+  $(".btnDeleteContact").click(function (e) {
+    e.preventDefault();
+    var id = $(this).data("id");
+    $.ajax({
+      type: "POST",
+      url: "../backend/Controller/post.php",
+      data: {
+        SubmitType: "DeleteContact",
+        id: id,
+      },
+      success: function (response) {
+        if (response == "200") {
+          showAlert("alert-success", "Contact Deleted!");
+          window.location.reload();
+        } else {
+          showAlert("alert-danger", "Failed to delete a contact.");
+        }
+      },
+    });
+  });
+
+  $(".btnEditContact").click(function (e) {
+    e.preventDefault();
+    $("#contactEditContact").modal("show");
+    $("#editHotlineId").val($(this).data("id"));
+    $("#EditContactName").val($(this).data("name"));
+    $("#EditContactNo").val($(this).data("number"));
+  });
+
+  $("#contactFrmEditContact").submit(function (e) {
+    e.preventDefault();
+    var formData = $(this).serialize();
+    $.ajax({
+      type: "POST",
+      url: "../backend/Controller/post.php",
+      data: formData,
+      success: function (response) {
+        closeModal();
+        if (response == "200") {
+          showAlert("alert-success", "Contact Edited!");
+          window.location.reload();
+        } else {
+          showAlert("alert-danger", "Failed to edit a contact.");
+        }
+      },
+    });
+  });
+  // End of Contact
+
   screenSize();
 });

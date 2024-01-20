@@ -80,6 +80,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo $db->addNewProduct($_POST['ID'], $_POST['productName'], $_FILES['productImage']);
         } elseif ($_POST['SubmitType'] == 'DeleteProduct') {
             echo $db->deleteProduct($_POST['id'], $_POST['img']);
+        } elseif ($_POST['SubmitType'] == 'AddNewContact') {
+            echo $db->addNewContact($_POST['contactName'], $_POST['contactNo']);
+        } elseif ($_POST['SubmitType'] == 'DeleteContact') {
+            echo $db->deleteContact($_POST['id']);
+        } elseif ($_POST['SubmitType'] == 'EditContact') {
+            echo $db->editContact($_POST['editHotlineId'], $_POST['EditContactName'], $_POST['EditContactNo']);
         }
     }
 }

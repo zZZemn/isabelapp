@@ -16,6 +16,7 @@ $db = new global_class();
     <link rel="stylesheet" href="../global/css/login.css">
     <link rel="stylesheet" href="../global/css/styles.css">
     <link rel="stylesheet" href="css/header-footer.css">
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="shortcut icon" href="../assets/system-img/logo.png" type="image/x-icon">
 </head>
 
@@ -46,7 +47,7 @@ $db = new global_class();
                     <li><a href="store.php" class="nav-products"><i class="bi bi-shop"></i> Products</a></li>
                     <li><a href="#" class="nav-spots"><i class="bi bi-card-image"></i> Tourist Spot</a></li>
                     <li><a href="restaurant.php" class="nav-resto"><i class="bi bi-egg-fried"></i> Restaurant</a></li>
-                    <li><a href="#" class="nav-contact"><i class="bi bi-telephone-fill"></i> Contact</a></li>
+                    <li><a href="contact.php" class="nav-contact"><i class="bi bi-telephone-fill"></i> Contact</a></li>
                 </ul>
             </li>
         </ul>
