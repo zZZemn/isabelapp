@@ -92,6 +92,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo $db->addNews($_POST);
         } elseif ($_POST['SubmitType'] == 'EditNews') {
             echo $db->editNews($_POST);
+        } elseif ($_POST['SubmitType'] == 'newsUploadImg') {
+            echo $db->uploadNewsImage($_POST['id'], $_FILES['newsImg']);
         }
     }
 }

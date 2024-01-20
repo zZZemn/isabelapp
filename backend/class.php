@@ -377,4 +377,37 @@ class global_class extends db_connect
             return 200;
         }
     }
+
+    public function uploadNewsImage($id, $file)
+    {
+        $fileName = 'SMESIMG-' . str_pad(rand(0, 9999999999), 10, '0', STR_PAD_LEFT);
+        $checkFileName = $this->checkSMEsImgFileName($fileName);
+        while ($checkFileName->num_rows > 0) {
+            $fileName = 'SMESIMG-' . str_pad(rand(0, 9999999999), 10, '0', STR_PAD_LEFT);
+            $checkFileName = $this->checkSMEsImgFileName($fileName);
+        }
+
+        if (!empty($_FILES['newsImg']['size'])) {
+            $file_name = $file['name'];
+            $file_tmp = $file['tmp_name'];
+            $extension = pathinfo($file_name, PATHINFO_EXTENSION);
+            $destinationDirectory = __DIR__ . '../SMEsImg/';
+            $newFileName = $fileName . '.' . $extension;
+            $destination = $destinationDirectory . $newFileName;
+            if (is_uploaded_file($file_tmp)) {
+                if (move_uploaded_file($file_tmp, $destination)) {
+                    $query = $this->conn->prepare("INSERT INTO `smes_img`(`SMES_ID`, `FILE_NAME`) VALUES ('$id','$newFileName')");
+                    if ($query->execute()) {
+                        return 200;
+                    }
+                } else {
+                    return $destination;
+                }
+            } else {
+                return "Error: File upload failed or file not found.";
+            }
+        } else {
+            return 'File is empty';
+        }
+    }
 }

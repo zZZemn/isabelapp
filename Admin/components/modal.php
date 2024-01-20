@@ -140,7 +140,16 @@
 
                         </div>
                     </div>
+                    <hr>
+                    <div>
+                        <center>
+                            <h5>Images</h5>
+                        </center>
+                        <button type="button" class="btn btn-dark" id="btnNewsAddNewImage" data-id=""><i class="bi bi-plus-square"></i> Add Image</button>
+                        <div class="images-container text-center" id="newsImgContainer">
 
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Save</button>
@@ -150,6 +159,31 @@
         </div>
     </div>
 </div>
+
+<div class="modal" tabindex="-1" role="dialog" id="NewsAddImageModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="bi bi-cloud-arrow-up"></i> New Image</h5>
+            </div>
+            <form id="frmNewsUploadImage">
+                <div class="modal-body">
+                    <input type="hidden" value="newsUploadImg" name="SubmitType">
+                    <input type="hidden" value="" name="id" id="addImgNewsId">
+                    <div class="">
+                        <label for="newsImg" style="margin-left: 5px;">Upload Here:</label>
+                        <input type="file" class="form-control mt-1" name="newsImg" id="newsImg" required accept="image/*">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="reset" class="btn btn-secondary btnCloseModal" id="btnCloseModal" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <!-- End of news.php -->
 
 <!-- <div class="modal" tabindex="-1" role="dialog" id="AddImageModal">

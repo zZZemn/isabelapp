@@ -27,8 +27,8 @@ include("components/header.php");
                     <td><?= date('g:i A', strtotime($news['TIME'])) ?></td>
                     <td>
                         <textarea hidden id="<?= $news['NEWS_ID'] ?>"><?= $news['MAP'] ?></textarea>
-                        <button class="btn btn-success btnEditNews" data-id="<?= $news['NEWS_ID'] ?>" data-name="<?= $news['EVENT_NAME'] ?>" data-address="<?= $news['ADDRESS'] ?>" data-description="<?= $news['DESCRIPTION'] ?>" data-date="<?= $news['DATE'] ?>" data-time="<?= $news['TIME'] ?>"><i class="bi bi-pen"></i>Edit</button>
-                        <button class="btn btn-danger btnDeleteNews" data-id="<?= $news['NEWS_ID'] ?>"><i class="bi bi-trash-fill"></i>Delete</button>
+                        <button class="btn btn-success btnEditNews" data-id="<?= $news['NEWS_ID'] ?>" data-name="<?= $news['EVENT_NAME'] ?>" data-address="<?= $news['ADDRESS'] ?>" data-description="<?= $news['DESCRIPTION'] ?>" data-date="<?= $news['DATE'] ?>" data-time="<?= $news['TIME'] ?>"><i class="bi bi-pen"></i> Edit</button>
+                        <button class="btn btn-danger btnDeleteNews" data-id="<?= $news['NEWS_ID'] ?>"><i class="bi bi-trash-fill"></i> Delete</button>
                     </td>
                 </tr>
             <?php

@@ -3,3 +3,9 @@
   bottom: 20px;
   right: 20px;
 }
+
+.img-in-modal {
+  height: 300px;
+  width: 300px;
+  margin: auto;
+}
