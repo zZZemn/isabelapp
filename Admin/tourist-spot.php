@@ -26,11 +26,9 @@ include("components/header.php");
                     <td><?= $spot['SPOT_TYPE'] ?></td>
                     <td><?= $spot['ADDRESS'] ?></td>
                     <td>
-                    <td>
                         <textarea hidden id="<?= $spot['SPOT_ID'] ?>"><?= $spot['MAP'] ?></textarea>
-                        <button class="btn btn-success btnEditSpot" data-id="<?= $spot['SPOT_ID'] ?>" data-name="<?= $spot['SPOT_NAME'] ?>" data-spottype="<?= $spot['SPOT_TYPE'] ?>" data-fee="<?= $spot['FEE'] ?>" data-address="<?= $news['ADDRESS'] ?>" data-description="<?= $news['DESCRIPTION'] ?>"><i class="bi bi-pen"></i> Edit</button>
+                        <button class="btn btn-success btnEditSpot" data-id="<?= $spot['SPOT_ID'] ?>" data-name="<?= $spot['SPOT_NAME'] ?>" data-spottype="<?= $spot['SPOT_TYPE'] ?>" data-fee="<?= $spot['FEE'] ?>" data-address="<?= $spot['ADDRESS'] ?>" data-description="<?= $spot['DESCRIPTION'] ?>"><i class="bi bi-pen"></i> Edit</button>
                         <button class="btn btn-danger btnDeleteSpot" data-id="<?= $spot['SPOT_ID'] ?>"><i class="bi bi-trash-fill"></i> Delete</button>
-                    </td>
                     </td>
                 </tr>
             <?php

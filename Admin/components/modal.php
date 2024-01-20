@@ -103,7 +103,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title"><i class="bi bi-newspaper"></i> Add News Update</h5>
+                <h5 class="modal-title"><i class="bi bi-newspaper"></i> Edit News</h5>
             </div>
             <form id="newsFrmEditNews">
                 <input type="hidden" name="SubmitType" value="EditNews">
@@ -226,6 +226,97 @@
                     <div class="mt-3">
                         <label for="spotMap">Map:</label>
                         <textarea class="form-control mt-1" name="spotMap" id="spotMap" required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="reset" class="btn btn-secondary btnCloseModal" id="btnCloseModal" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="tsEditModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="bi bi-card-image"></i> Edit Tourist Spot</h5>
+            </div>
+            <form id="tsFrmEditTs">
+                <input type="hidden" name="SubmitType" value="EditTouristSpot">
+                <input type="hidden" name="id" id="spotEditId">
+                <div class="modal-body">
+                    <div class="">
+                        <label for="spotEditName">Name:</label>
+                        <input type="text" class="form-control mt-1" name="spotEditName" id="spotEditName" required>
+                    </div>
+                    <div class="mt-3">
+                        <label for="spotEditType">Spot Type:</label>
+                        <select id="spotEditType" class="form-control" required name="spotEditType">
+                            <option value="Lake">Lake</option>
+                            <option value="Beach">Beach</option>
+                            <option value="Mountain">Mountain</option>
+                            <option value="City View">City View</option>
+                            <option value="River">River</option>
+                        </select>
+                    </div>
+                    <div class="mt-3">
+                        <label for="spotEditDescription">Description:</label>
+                        <input type="text" class="form-control mt-1" name="spotEditDescription" id="spotEditDescription" required>
+                    </div>
+                    <div class="mt-3">
+                        <label for="spotEditAddress">Address:</label>
+                        <input type="text" class="form-control mt-1" name="spotEditAddress" id="spotEditAddress" required>
+                    </div>
+                    <div class="mt-3">
+                        <label for="spotEditFee">Fee:</label>
+                        <input type="number" class="form-control mt-1" name="spotEditFee" id="spotEditFee" required>
+                    </div>
+                    <div class="mt-3">
+                        <label for="spotEditMap">Map:</label>
+                        <textarea class="form-control mt-1" name="spotEditMap" id="spotEditMap" required></textarea>
+                    </div>
+                    <hr>
+                    <div class="mt-3">
+                        <label for="MapPrevTs">Map Preview:</label>
+                        <div id="MapPrevTs" class="mt-3" style="max-width: 100%; overflow: auto;">
+
+                        </div>
+                    </div>
+                    <hr>
+                    <div>
+                        <center>
+                            <h5>Images</h5>
+                        </center>
+                        <button type="button" class="btn btn-dark" id="btnTouristSpotAddNewImage" data-id=""><i class="bi bi-plus-square"></i> Add Image</button>
+                        <div class="images-container text-center" id="spotsImgContainer">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="reset" class="btn btn-secondary btnCloseModal" id="btnCloseModal" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="TouristSpotAddImageModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="bi bi-cloud-arrow-up"></i> New Image</h5>
+            </div>
+            <form id="frmTouristSpotUploadImage">
+                <div class="modal-body">
+                    <input type="hidden" value="spotUploadImg" name="SubmitType">
+                    <input type="hidden" value="" name="id" id="addImgSpotId">
+                    <div class="">
+                        <label for="spotImg" style="margin-left: 5px;">Upload Here:</label>
+                        <input type="file" class="form-control mt-1" name="spotImg" id="spotImg" required accept="image/*">
                     </div>
                 </div>
                 <div class="modal-footer">

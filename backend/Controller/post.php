@@ -96,6 +96,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo $db->uploadNewsImage($_POST['id'], $_FILES['newsImg']);
         } elseif ($_POST['SubmitType'] == 'AddTouristSpot') {
             echo $db->addNewSpot($_POST);
+        } elseif ($_POST['SubmitType'] == 'EditTouristSpot') {
+            echo $db->editSpot($_POST);
+        } elseif ($_POST['SubmitType'] == 'spotUploadImg') {
+            echo $db->uploadSpotImage($_POST['id'], $_FILES['spotImg']);
+        } elseif ($_POST['SubmitType'] == 'DeleteSpot') {
+            echo $db->deleteSpot($_POST['id']);
         }
     }
 }

@@ -297,6 +297,115 @@ $(document).ready(function () {
     });
   });
 
+  $(".btnEditSpot").click(function (e) {
+    e.preventDefault();
+    $("#spotEditId").val($(this).data("id"));
+    $("#spotEditName").val($(this).data("name"));
+    $("#spotEditType").val($(this).data("spottype"));
+    $("#spotEditDescription").val($(this).data("description"));
+    $("#spotEditAddress").val($(this).data("address"));
+    $("#spotEditFee").val($(this).data("fee"));
+    $("#spotEditMap").val($("#" + $(this).data("id")).val());
+    $("#MapPrevTs").html($("#" + $(this).data("id")).val());
+    $("#btnTouristSpotAddNewImage").data("id", $(this).data("id"));
+
+    $.ajax({
+      type: "GET",
+      url: "../backend/Controller/get.php",
+      data: {
+        SubmitType: "GetSpotsImages",
+        id: $(this).data("id"),
+      },
+      success: function (response) {
+        var images = JSON.parse(response);
+        console.log(images);
+        if (images.length > 0) {
+          images.forEach((image) => {
+            var img = $(
+              "<img class='img-in-modal' src='../backend/SMEsImg/" +
+                image.file_name +
+                "'>"
+            );
+            $("#spotsImgContainer").append(img);
+          });
+        } else {
+          var text = $("<center class='text-danger mt-5'>");
+          $(text).text("No image No image provided");
+          $("#spotsImgContainer").html(text);
+        }
+      },
+    });
+
+    $("#tsEditModal").modal("show");
+  });
+
+  $("#tsFrmEditTs").submit(function (e) {
+    e.preventDefault();
+    var formData = $(this).serialize();
+    $.ajax({
+      type: "POST",
+      url: "../backend/Controller/post.php",
+      data: formData,
+      success: function (response) {
+        closeModal();
+        if (response == "200") {
+          showAlert("alert-success", "Spot Edited!");
+          window.location.reload();
+        } else {
+          showAlert("alert-danger", "Failed to edit a spot.");
+        }
+      },
+    });
+  });
+
+  $("#btnTouristSpotAddNewImage").click(function (e) {
+    e.preventDefault();
+    closeModal();
+    $("#addImgSpotId").val($(this).data("id"));
+    $("#TouristSpotAddImageModal").modal("show");
+  });
+
+  $("#frmTouristSpotUploadImage").submit(function (e) {
+    e.preventDefault();
+    var formData = new FormData($(this)[0]);
+    $.ajax({
+      type: "POST",
+      url: "../backend/Controller/post.php",
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (response) {
+        console.log(response);
+        closeModal();
+        if (response == "200") {
+          showAlert("alert-success", "Image Uploaded!");
+          window.location.reload();
+        } else {
+          showAlert("alert-danger", "Failed to upload image.");
+        }
+      },
+    });
+  });
+
+  $(".btnDeleteSpot").click(function (e) {
+    e.preventDefault();
+    $.ajax({
+      type: "POST",
+      url: "../backend/Controller/post.php",
+      data: {
+        SubmitType: "DeleteSpot",
+        id: $(this).data("id"),
+      },
+      success: function (response) {
+        if (response == "200") {
+          showAlert("alert-success", "Spot Deleted!");
+          window.location.reload();
+        } else {
+          showAlert("alert-danger", "Failed to delete spot.");
+        }
+      },
+    });
+  });
   // End of Tourist Spot
 
   screenSize();

@@ -4,7 +4,7 @@ $db = new global_class();
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (isset($_GET['SubmitType'])) {
-        if ($_GET['SubmitType'] == 'GetNewsImages') {
+        if ($_GET['SubmitType'] == 'GetNewsImages' || $_GET['SubmitType'] == 'GetSpotsImages') {
             $getImages = $db->getSMEsImages($_GET['id']);
             $data = [];
             while ($img = $getImages->fetch_assoc()) {

@@ -444,4 +444,53 @@ class global_class extends db_connect
             return 200;
         }
     }
+
+    public function editSpot($post)
+    {
+        $query = $this->conn->prepare("UPDATE `tourist_spot` SET `SPOT_NAME`='" . $post['spotEditName'] . "',`SPOT_TYPE`='" . $post['spotEditType'] . "',`DESCRIPTION`='" . $post['spotEditDescription'] . "',`ADDRESS`='" . $post['spotEditAddress'] . "',`MAP`='" . $post['spotEditMap'] . "',`FEE`='" . $post['spotEditFee'] . "',`STATUS`='1' WHERE `SPOT_ID` = '" . $post['id'] . "'");
+        if ($query->execute()) {
+            return 200;
+        }
+    }
+
+    public function uploadSpotImage($id, $file)
+    {
+        $fileName = 'SMESIMG-' . str_pad(rand(0, 9999999999), 10, '0', STR_PAD_LEFT);
+        $checkFileName = $this->checkSMEsImgFileName($fileName);
+        while ($checkFileName->num_rows > 0) {
+            $fileName = 'SMESIMG-' . str_pad(rand(0, 9999999999), 10, '0', STR_PAD_LEFT);
+            $checkFileName = $this->checkSMEsImgFileName($fileName);
+        }
+
+        if (!empty($_FILES['spotImg']['size'])) {
+            $file_name = $file['name'];
+            $file_tmp = $file['tmp_name'];
+            $extension = pathinfo($file_name, PATHINFO_EXTENSION);
+            $destinationDirectory = __DIR__ . '../SMEsImg/';
+            $newFileName = $fileName . '.' . $extension;
+            $destination = $destinationDirectory . $newFileName;
+            if (is_uploaded_file($file_tmp)) {
+                if (move_uploaded_file($file_tmp, $destination)) {
+                    $query = $this->conn->prepare("INSERT INTO `smes_img`(`SMES_ID`, `FILE_NAME`) VALUES ('$id','$newFileName')");
+                    if ($query->execute()) {
+                        return 200;
+                    }
+                } else {
+                    return $destination;
+                }
+            } else {
+                return "Error: File upload failed or file not found.";
+            }
+        } else {
+            return 'File is empty';
+        }
+    }
+
+    public function deleteSpot($id)
+    {
+        $query = $this->conn->prepare("DELETE FROM `tourist_spot` WHERE `SPOT_ID` = '$id'");
+        if ($query->execute()) {
+            return 200;
+        }
+    }
 }
