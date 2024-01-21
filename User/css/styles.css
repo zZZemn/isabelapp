@@ -101,3 +101,10 @@ main {
   width: 30px;
 }
 /* End of News */
+
+/* Tourist Spot */
+.btnSpotContainer img {
+  height: 100px;
+  width: 100px;
+}
+/* End of Tourist Spot */

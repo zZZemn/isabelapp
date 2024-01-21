@@ -55,11 +55,11 @@ if (isset($_SESSION['user_id'])) {
     </nav>
 
     <div class="side-nav bg-light">
-        <a href="index.php?page=news" id="nav-news"><i class="bi bi-newspaper"></i> News Update</a>
-        <a href="index.php?page=accommodation" id="nav-accom"><i class="bi bi-building"></i> Accommodation</a>
-        <a href="index.php?page=products" id="nav-products"><i class="bi bi-shop"></i> Products</a>
-        <a href="index.php?page=tourist_spot" id="nav-ts"><i class="bi bi-card-image"></i> Tourist Spot</a>
-        <a href="index.php?page=restaurant" id="nav-resto"><i class="bi bi-egg-fried"></i> Restaurant</a>
-        <a href="index.php?page=hotline" id="nav-contact"><i class="bi bi-telephone-fill"></i> Contact</a>
+        <a href="index.php?page=news" id="nav-news" class="<?= (isset($_GET['page']) && $_GET['page'] == 'news') ? 'side-nav-active' : '' ?>"><i class="bi bi-newspaper"></i> News Update</a>
+        <a href="index.php?page=accommodation" id="nav-accom" class="<?= (isset($_GET['page']) && $_GET['page'] == 'accommodation') ? 'side-nav-active' : '' ?>"><i class="bi bi-building"></i> Accommodation</a>
+        <a href="index.php?page=products" id="nav-products" class="<?= (isset($_GET['page']) && $_GET['page'] == 'products') ? 'side-nav-active' : '' ?>"><i class="bi bi-shop"></i> Products</a>
+        <a href="index.php?page=tourist_spot" id="nav-ts" class="<?= (isset($_GET['page']) && $_GET['page'] == 'tourist_spot') ? 'side-nav-active' : '' ?>"><i class="bi bi-card-image"></i> Tourist Spot</a>
+        <a href="index.php?page=restaurant" id="nav-resto" class="<?= (isset($_GET['page']) && $_GET['page'] == 'restaurant') ? 'side-nav-active' : '' ?>"><i class="bi bi-egg-fried"></i> Restaurant</a>
+        <a href="index.php?page=hotline" id="nav-contact" class="<?= (isset($_GET['page']) && $_GET['page'] == 'hotline') ? 'side-nav-active' : '' ?>"><i class="bi bi-telephone-fill"></i> Contact</a>
     </div>
     <main class="container">

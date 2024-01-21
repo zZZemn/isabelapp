@@ -9,7 +9,7 @@ if (isset($_GET['page'])) {
     } elseif ($page == 'products') {
         echo $page;
     } elseif ($page == 'tourist_spot') {
-        echo $page;
+        include('page/ts.php');
     } elseif ($page == 'restaurant') {
         echo $page;
     } elseif ($page == 'hotline') {
