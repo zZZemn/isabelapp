@@ -27,39 +27,39 @@ if (isset($_SESSION['user_id'])) {
 </head>
 
 <body>
-    <main>
-        <nav class="top-nav d-flex justify-content-between align-items-center bg-success p-3 pt-0 pb-0 flex-wrap">
-            <a href="index.php">
-                <img src="../assets/system-img/logo.png">
-            </a>
-            <div class="search-container">
-                <input type="search" class="form-control" id="search">
-                <button class="btn btn-light"><i class="bi bi-search"></i></button>
-            </div>
-            <?php
-            if ($isLogin) {
-            ?>
-                <div class="navs-a-container">
-                    <a href="../process/logout.php" class="btn btn-dark"><i class="bi bi-box-arrow-left"></i> Logout | <?= $user['NAME'] ?></a>
-                </div>
-            <?php
-            } else {
-            ?>
-                <div class="navs-a-container d-flex justify-content-between" style="width: 230px;">
-                    <a href="tourist-login.php"><i class="bi bi-box-arrow-in-right"></i> Login</a>
-                    <a href="../Admin"><i class="bi bi-person-check-fill"></i> SMEs</a>
-                    <a href="../SMEs"><i class="bi bi-person-fill-gear"></i> Admin</a>
-                </div>
-            <?php
-            }
-            ?>
-        </nav>
-
-        <div class="side-nav bg-light">
-            <a href="#" id="nav-news"><i class="bi bi-newspaper"></i> News Update</a>
-            <a href="#" id="nav-accom"><i class="bi bi-building"></i> Accommodation</a>
-            <a href="#" id="nav-products"><i class="bi bi-shop"></i> Products</a>
-            <a href="#" id="nav-ts"><i class="bi bi-card-image"></i> Tourist Spot</a>
-            <a href="#" id="nav-resto"><i class="bi bi-egg-fried"></i> Restaurant</a>
-            <a href="#" id="nav-contact"><i class="bi bi-telephone-fill"></i> Contact</a>
+    <nav class="top-nav d-flex justify-content-between align-items-center bg-success p-3 pt-0 pb-0 flex-wrap">
+        <a href="index.php">
+            <img src="../assets/system-img/logo.png">
+        </a>
+        <div class="search-container">
+            <input type="search" class="form-control" id="search">
+            <button class="btn btn-light"><i class="bi bi-search"></i></button>
         </div>
+        <?php
+        if ($isLogin) {
+        ?>
+            <div class="navs-a-container">
+                <a href="../process/logout.php" class="btn btn-dark"><i class="bi bi-box-arrow-left"></i> Logout | <?= $user['NAME'] ?></a>
+            </div>
+        <?php
+        } else {
+        ?>
+            <div class="navs-a-container d-flex justify-content-between" style="width: 230px;">
+                <a href="tourist-login.php"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+                <a href="../SMEs"><i class="bi bi-person-check-fill"></i> SMEs</a>
+                <a href="../Admin"><i class="bi bi-person-fill-gear"></i> Admin</a>
+            </div>
+        <?php
+        }
+        ?>
+    </nav>
+
+    <div class="side-nav bg-light">
+        <a href="index.php?page=news" id="nav-news"><i class="bi bi-newspaper"></i> News Update</a>
+        <a href="index.php?page=accommodation" id="nav-accom"><i class="bi bi-building"></i> Accommodation</a>
+        <a href="index.php?page=products" id="nav-products"><i class="bi bi-shop"></i> Products</a>
+        <a href="index.php?page=tourist_spot" id="nav-ts"><i class="bi bi-card-image"></i> Tourist Spot</a>
+        <a href="index.php?page=restaurant" id="nav-resto"><i class="bi bi-egg-fried"></i> Restaurant</a>
+        <a href="index.php?page=hotline" id="nav-contact"><i class="bi bi-telephone-fill"></i> Contact</a>
+    </div>
+    <main class="container">
