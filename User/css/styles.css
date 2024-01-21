@@ -1,3 +1,7 @@
+body {
+  overflow-x: hidden;
+}
+
 main {
   position: absolute;
   top: 80px;
@@ -5,6 +9,16 @@ main {
   width: calc(100% - 200px);
   height: calc(100vh - 80px);
   overflow-y: auto;
+}
+
+.modal img {
+  height: 40px;
+  width: 40px;
+}
+
+.modal-lg-img {
+  height: 200px !important;
+  width: 200px !important;
 }
 
 .top-nav {

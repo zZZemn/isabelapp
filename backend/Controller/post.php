@@ -132,6 +132,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo $db->deleteSpot($_POST['id']);
         } elseif ($_POST['SubmitType'] == 'SMEsChangeStatus') {
             echo $db->changeSMEsStatus($_POST['table'], $_POST['id'], $_POST['newStatus']);
+        } elseif ($_POST['SubmitType'] == 'Rate') {
+            session_start();
+            echo $db->rate($_POST, $_SESSION['user_id']);
         }
     }
 }

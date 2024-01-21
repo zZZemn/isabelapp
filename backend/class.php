@@ -548,4 +548,13 @@ class global_class extends db_connect
             return 200;
         }
     }
+
+    // Rate
+    public function rate($post, $userId)
+    {
+        $query = $this->conn->prepare("INSERT INTO `smes_rate_reviews`(`USER_ID`, `SMES_ID`, `RATE`, `REVIEW`) VALUES ('$userId','" . $post['id'] . "','" . $post['star'] . "','" . $post['review'] . "')");
+        if ($query->execute()) {
+            return 200;
+        }
+    }
 }

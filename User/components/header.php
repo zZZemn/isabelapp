@@ -26,6 +26,8 @@ if (isset($_SESSION['user_id'])) {
     <link rel="shortcut icon" href="../assets/system-img/logo.png" type="image/x-icon">
 </head>
 
+<div class="alert"></div>
+
 <body>
     <nav class="top-nav d-flex justify-content-between align-items-center bg-success p-3 pt-0 pb-0 flex-wrap">
         <a href="index.php">
