@@ -46,7 +46,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         echo 'Login Failed';
                     }
                 } else {
-                    echo 'Tourist';
+                    $password = $_POST['password'];
+                    $loginResult = $db->login('tourist', $_POST['username']);
+                    if ($loginResult->num_rows > 0) {
+                        $user = $loginResult->fetch_assoc();
+                        if (password_verify($password, $user['PASSWORD'])) {
+                            session_start();
+                            $_SESSION['user_id'] = $user['USER_ID'];
+                            echo 200;
+                        } else {
+                            echo 'Login Failed';
+                        }
+                    } else {
+                        echo 'Login Failed';
+                    }
                 }
             }
         } elseif ($_POST['SubmitType'] == 'SMEsSignUp') {
@@ -63,6 +76,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 session_start();
                 $_SESSION['smes_id'] = $smesId;
                 $_SESSION['smes_type'] = $_POST['smesType'];
+            }
+
+            echo $signup;
+        } elseif ($_POST['SubmitType'] == 'TouristSignup') {
+            $touristId = 'TOURIST-' . str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
+            $checkTouristId = $db->getTouristUsingId($touristId);
+            while ($checkTouristId->num_rows > 0) {
+                $touristId = 'TOURIST-' . str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
+                $checkTouristId = $db->getTouristUsingId($$touristId);
+            }
+
+            $signup = $db->touristSignUp($touristId, $_POST['name'], $_POST['username'], $_POST['password']);
+            if ($signup == 200) {
+                session_start();
+                $_SESSION['user_id'] = $touristId;
             }
 
             echo $signup;

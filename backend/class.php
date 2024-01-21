@@ -510,4 +510,42 @@ class global_class extends db_connect
             return 200;
         }
     }
+
+
+    // Users / Tourist
+    public function getTouristUsingId($id)
+    {
+        $query = $this->conn->prepare("SELECT * FROM `tourist` WHERE `USER_ID` = '$id'");
+        if ($query->execute()) {
+            $result = $query->get_result();
+            return $result;
+        }
+    }
+
+    public function touristSignUp($touristId, $name, $username, $password)
+    {
+        $checkUsername = $this->conn->prepare("SELECT * FROM `tourist` WHERE `USERNAME` = ?");
+        $checkUsername->bind_param("s", $username);
+
+        if ($checkUsername->execute()) {
+            $checkUsername->store_result();  // Store the result set
+            if ($checkUsername->num_rows > 0) {
+                $checkUsername->close();  // Close the prepared statement
+                return 'Username is already existing!';
+            }
+            $checkUsername->close();  // Close the prepared statement after checking
+        } else {
+            return 400;
+        }
+
+        $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
+
+        $insertQuery = $this->conn->prepare("INSERT INTO `tourist`(`USER_ID`, `USERNAME`, `PASSWORD`, `NAME`, `STATUS`) VALUES (?, ?, ?, ?, '1')");
+        $insertQuery->bind_param("ssss", $touristId, $username, $passwordHashed, $name);
+
+        if ($insertQuery->execute()) {
+            $insertQuery->close();  // Close the prepared statement after execution
+            return 200;
+        }
+    }
 }

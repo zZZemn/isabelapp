@@ -2,6 +2,10 @@
 session_start();
 include('../backend/class.php');
 $db = new global_class();
+if (!isset($_SESSION['admin_id'])) {
+    header("Location: index.php");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>

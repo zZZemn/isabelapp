@@ -1,3 +1,3 @@
-<a href="../Admin">Admin</a>
-<a href="../SMEs">SMEs</a>
 <?php
+include('components/header.php');
+include('components/footer.php');

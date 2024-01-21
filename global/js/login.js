@@ -71,4 +71,28 @@ $(document).ready(function () {
       },
     });
   });
+
+  $("#frmTouristLogin").submit(function (e) {
+    e.preventDefault();
+    var username = $("#touristUsername").val();
+    var password = $("#touristPassword").val();
+
+    $.ajax({
+      type: "POST",
+      url: "../backend/Controller/post.php",
+      data: {
+        SubmitType: "Login",
+        UserType: "Tourist",
+        username: username,
+        password: password,
+      },
+      success: function (response) {
+        if (response == "200") {
+          window.location.reload();
+        } else {
+          showAlert("alert-danger", "Incorrect username or password");
+        }
+      },
+    });
+  });
 });
