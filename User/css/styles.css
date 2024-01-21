@@ -122,3 +122,10 @@ main {
   width: 100px;
 }
 /* End of Tourist Spot */
+
+/* Accom */
+.btnAccomContainer img {
+  height: 100px;
+  width: 100px;
+}
+/* End of Accom */

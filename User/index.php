@@ -5,7 +5,7 @@ if (isset($_GET['page'])) {
     if ($page == 'news') {
         include('page/news.php');
     } elseif ($page == 'accommodation') {
-        echo $page;
+        include('page/accom.php');
     } elseif ($page == 'products') {
         echo $page;
     } elseif ($page == 'tourist_spot') {

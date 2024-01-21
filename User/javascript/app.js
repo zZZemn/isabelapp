@@ -130,4 +130,67 @@ $(document).ready(function () {
     });
   });
   // End of Spot
+
+  // Accom
+
+  $(".btnAccomContainer").click(function (e) {
+    e.preventDefault();
+    $("#accom-modal-sm-img-container").empty();
+
+    $("#accom-modal-accom-name").val($(this).data("name"));
+    $("#accom-modal-accom-description").val($(this).data("description"));
+    $("#accom-modal-email").val($(this).data("email"));
+    $("#accom-modal-contact-no").val($(this).data("number"));
+    $("#accom-modal-fb").val($(this).data("fb"));
+    $("#accom-modal-ig").val($(this).data("ig"));
+    $("#accom-modal-accom-address").val($(this).data("address"));
+    $("#accom-modal-map-preview-container").html($(this).data("map"));
+
+    $("#btnTsRate").data("id", $(this).data("id"));
+    $("#btnTsRate").data("name", $(this).data("name"));
+
+    $.ajax({
+      type: "GET",
+      url: "../backend/Controller/get.php",
+      data: {
+        SubmitType: "GetSpotsImages",
+        id: $(this).data("id"),
+      },
+      success: function (response) {
+        var images = JSON.parse(response);
+        console.log(images);
+        $("#accom-modal-lg-img").attr(
+          "src",
+          "../backend/SMEsImg/" + images[0].file_name
+        );
+        images.forEach((img) => {
+          var btn = $(
+            "<button class='btn accom-modal-change-img' data-id='" +
+              img.smes_id +
+              "' data-img='" +
+              img.file_name +
+              "'>"
+          );
+          var imghtml = $(
+            "<img src='../backend/SMEsImg/" + img.file_name + "'>"
+          );
+
+          $(btn).append(imghtml);
+          $("#accom-modal-sm-img-container").append(btn);
+          console.log(img.file_name);
+        });
+      },
+    });
+
+    $("#viewAccommodationModal").modal("show");
+  });
+
+  $(document).on("click", ".accom-modal-change-img", function (e) {
+    e.preventDefault();
+    $("#accom-modal-lg-img").attr(
+      "src",
+      "../backend/SMEsImg/" + $(this).data("img")
+    );
+  });
+  // End of Accom
 });
