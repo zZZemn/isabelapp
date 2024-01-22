@@ -193,4 +193,62 @@ $(document).ready(function () {
     );
   });
   // End of Accom
+
+  // Resto
+  $(".btnRestoContainer").click(function (e) {
+    e.preventDefault();
+    $("#viewRestaurantModal").modal("show");
+    $("#resto-modal-resto-name").val($(this).data("name"));
+    $("#resto-modal-resto-description").val($(this).data("description"));
+    $("#resto-modal-email").val($(this).data("email"));
+    $("#resto-modal-contact-no").val($(this).data("number"));
+    $("#resto-modal-fb").val($(this).data("fb"));
+    $("#resto-modal-ig").val($(this).data("ig"));
+    $("#resto-modal-resto-address").val($(this).data("address"));
+    $("#resto-modal-map-preview-container").html($(this).data("map"));
+
+    $("#btnTsRate").data("id", $(this).data("id"));
+    $("#btnTsRate").data("name", $(this).data("name"));
+
+    $.ajax({
+      type: "GET",
+      url: "../backend/Controller/get.php",
+      data: {
+        SubmitType: "GetSpotsImages",
+        id: $(this).data("id"),
+      },
+      success: function (response) {
+        var images = JSON.parse(response);
+        console.log(images);
+
+        if (images.length > 0) {
+          $("#resto-modal-lg-img").attr(
+            "src",
+            "../backend/SMEsImg/" + images[0].file_name
+          );
+
+          images.forEach((img) => {
+            var btn = $(
+              "<button class='btn resto-modal-change-img' data-id='" +
+                img.smes_id +
+                "' data-img='" +
+                img.file_name +
+                "'>"
+            );
+
+            var imghtml = $(
+              "<img src='../backend/SMEsImg/" + img.file_name + "'>"
+            );
+
+            $(btn).append(imghtml);
+            $("#resto-modal-sm-img-container").append(btn);
+            console.log(img.file_name);
+          });
+        } else {
+          $("#resto-modal-lg-img").attr("src", "../assets/system-img/logo.png");
+        }
+      },
+    });
+  });
+  // End of Resto
 });

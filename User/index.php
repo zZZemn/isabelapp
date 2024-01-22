@@ -11,7 +11,7 @@ if (isset($_GET['page'])) {
     } elseif ($page == 'tourist_spot') {
         include('page/ts.php');
     } elseif ($page == 'restaurant') {
-        echo $page;
+        include('page/restaurant.php');
     } elseif ($page == 'hotline') {
         include('page/contacts.php');
     } else {
