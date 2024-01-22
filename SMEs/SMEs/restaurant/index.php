@@ -52,11 +52,11 @@ include('components/header.php');
         </div>
         <div>
             <label style="font-size: 12px;">Facebook Link</label>
-            <p><i class="bi bi-facebook"></i> <?= ($resto['FACEBOOK_LINK'] == '') ? 'No link provided' : '<a href="' . $resto['FACEBOOK_LINK'] . '" target="_blank" class="text-dark" style="text-decoration: none;">' . $accom['FACEBOOK_LINK'] . '</a>' ?></p>
+            <p><i class="bi bi-facebook"></i> <?= ($resto['FACEBOOK_LINK'] == '') ? 'No link provided' : '<a href="' . $resto['FACEBOOK_LINK'] . '" target="_blank" class="text-dark" style="text-decoration: none;">' . $resto['FACEBOOK_LINK'] . '</a>' ?></p>
         </div>
         <div>
             <label style="font-size: 12px;">Instagram Link</label>
-            <p><i class="bi bi-instagram"></i> <?= ($resto['INSTAGRAM_LINK'] == '') ? 'No link provided' : '<a href="' . $resto['INSTAGRAM_LINK'] . '" target="_blank" class="text-dark" style="text-decoration: none;">' . $accom['INSTAGRAM_LINK'] . '</a>' ?></p>
+            <p><i class="bi bi-instagram"></i> <?= ($resto['INSTAGRAM_LINK'] == '') ? 'No link provided' : '<a href="' . $resto['INSTAGRAM_LINK'] . '" target="_blank" class="text-dark" style="text-decoration: none;">' . $resto['INSTAGRAM_LINK'] . '</a>' ?></p>
         </div>
     </div>
     <hr>

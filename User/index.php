@@ -7,7 +7,7 @@ if (isset($_GET['page'])) {
     } elseif ($page == 'accommodation') {
         include('page/accom.php');
     } elseif ($page == 'products') {
-        echo $page;
+        include('page/store.php');
     } elseif ($page == 'tourist_spot') {
         include('page/ts.php');
     } elseif ($page == 'restaurant') {

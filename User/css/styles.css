@@ -136,3 +136,10 @@ main {
   width: 100px;
 }
 /* End of Resto */
+
+/* Seller */
+.btnSellerContainer img {
+  height: 100px;
+  width: 100px;
+}
+/* End of Seller */

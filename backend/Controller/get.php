@@ -18,6 +18,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             }
 
             echo json_encode($data);
+        } elseif ($_GET['SubmitType'] == 'GetProducts') {
+            $getProducts = $db->getProducts($_GET['id']);
+            $data = [];
+            while ($product = $getProducts->fetch_assoc()) {
+                $pro = [
+                    "id" => $product['PRODUCT_ID'],
+                    "seller_id" => $product['SELLER_ID'],
+                    "product_name" => $product['PRODUCT_NAME'],
+                    "img" => $product['PRODUCT_IMG']
+                ];
+                $data[] = $pro;
+            }
+
+            echo json_encode($data);
         }
     }
 }

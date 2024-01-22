@@ -196,6 +196,8 @@ $(document).ready(function () {
 
   // Resto
   $(".btnRestoContainer").click(function (e) {
+    $("#resto-modal-sm-img-container").empty();
+
     e.preventDefault();
     $("#viewRestaurantModal").modal("show");
     $("#resto-modal-resto-name").val($(this).data("name"));
@@ -250,5 +252,110 @@ $(document).ready(function () {
       },
     });
   });
+
+  $(document).on("click", ".resto-modal-change-img", function (e) {
+    e.preventDefault();
+    $("#resto-modal-lg-img").attr(
+      "src",
+      "../backend/SMEsImg/" + $(this).data("img")
+    );
+  });
   // End of Resto
+
+  // Seller
+  $(".btnSellerContainer").click(function (e) {
+    $("#seller-products-container").empty();
+    $("#seller-modal-sm-img-container").empty();
+
+    e.preventDefault();
+    $("#seller-modal-name").val($(this).data("name"));
+    $("#seller-modal-email").val($(this).data("email"));
+    $("#seller-modal-contact-no").val($(this).data("number"));
+    $("#seller-modal-fb").val($(this).data("fb"));
+    $("#seller-modal-ig").val($(this).data("ig"));
+    $("#seller-modal-address").val($(this).data("address"));
+    $("#seller-modal-map-preview-container").html($(this).data("map"));
+
+    $("#btnTsRate").data("id", $(this).data("id"));
+    $("#btnTsRate").data("name", $(this).data("name"));
+
+    $.ajax({
+      type: "GET",
+      url: "../backend/Controller/get.php",
+      data: {
+        SubmitType: "GetSpotsImages",
+        id: $(this).data("id"),
+      },
+      success: function (response) {
+        var images = JSON.parse(response);
+        console.log(images);
+
+        if (images.length > 0) {
+          $("#seller-modal-lg-img").attr(
+            "src",
+            "../backend/SMEsImg/" + images[0].file_name
+          );
+
+          images.forEach((img) => {
+            var btn = $(
+              "<button class='btn seller-modal-change-img' data-id='" +
+                img.smes_id +
+                "' data-img='" +
+                img.file_name +
+                "'>"
+            );
+
+            var imghtml = $(
+              "<img src='../backend/SMEsImg/" + img.file_name + "'>"
+            );
+
+            $(btn).append(imghtml);
+            $("#seller-modal-sm-img-container").append(btn);
+            console.log(img.file_name);
+          });
+        } else {
+          $("#modal-lg-img").attr("src", "../assets/system-img/logo.png");
+        }
+      },
+    });
+
+    $.ajax({
+      type: "GET",
+      url: "../backend/Controller/get.php",
+      data: {
+        SubmitType: "GetProducts",
+        id: $(this).data("id"),
+      },
+      success: function (response) {
+        var data = JSON.parse(response);
+        console.log(data);
+        data.forEach((product) => {
+          var div = $(
+            "<div class='d-flex flex-column align-items-center card p-2 m-1'>"
+          );
+          var img = $(
+            "<img src='../backend/products-img/" + product.img + "'>"
+          );
+          var h6 = $(
+            "<p style='font-size: 12px;'>" + product.product_name + "</p>"
+          );
+
+          $(div).append(img).append(h6);
+          $("#seller-products-container").append(div);
+        });
+      },
+    });
+
+    $("#viewRestaurantModal").modal("show");
+  });
+
+  $(document).on("click", ".seller-modal-change-img", function (e) {
+    e.preventDefault();
+    console.log("asd");
+    $("#seller-modal-lg-img").attr(
+      "src",
+      "../backend/SMEsImg/" + $(this).data("img")
+    );
+  });
+  // End of Seller
 });
