@@ -513,6 +513,15 @@ class global_class extends db_connect
 
 
     // Users / Tourist
+    public function getTourist()
+    {
+        $query = $this->conn->prepare("SELECT * FROM `tourist`");
+        if ($query->execute()) {
+            $result = $query->get_result();
+            return $result;
+        }
+    }
+
     public function getTouristUsingId($id)
     {
         $query = $this->conn->prepare("SELECT * FROM `tourist` WHERE `USER_ID` = '$id'");
@@ -555,6 +564,15 @@ class global_class extends db_connect
         $query = $this->conn->prepare("INSERT INTO `smes_rate_reviews`(`USER_ID`, `SMES_ID`, `RATE`, `REVIEW`) VALUES ('$userId','" . $post['id'] . "','" . $post['star'] . "','" . $post['review'] . "')");
         if ($query->execute()) {
             return 200;
+        }
+    }
+
+    public function getRates()
+    {
+        $query = $this->conn->prepare("SELECT * FROM `smes_rate_reviews`");
+        if ($query->execute()) {
+            $result = $query->get_result();
+            return $result;
         }
     }
 }

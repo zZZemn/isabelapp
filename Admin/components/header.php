@@ -41,8 +41,8 @@ if (!isset($_SESSION['admin_id'])) {
         </div>
         <ul class="list-group nav-ul">
             <li><a href="dashboard.php" class="nav-dashboard"><i class="bi bi-clipboard-check-fill"></i> Dashboard</a></li>
-            <li><a href="#" class="nav-accounts"><i class="bi bi-people-fill"></i> Accounts Sign in</a></li>
-            <li><a href="#" class="nav-ratings"><i class="bi bi-hand-thumbs-up-fill"></i> Ratings & Reviews</a></li>
+            <li><a href="accounts.php" class="nav-accounts"><i class="bi bi-people-fill"></i> Accounts Sign in</a></li>
+            <li><a href="rating-reviews.php" class="nav-ratings"><i class="bi bi-hand-thumbs-up-fill"></i> Ratings & Reviews</a></li>
             <li class="li-manage">
                 <a href="#" id="btnManage" class="nav-manage"><i class="bi bi-kanban"></i> Manage</a>
                 <ul class="list-group ul-manage mt-5">
@@ -52,6 +52,7 @@ if (!isset($_SESSION['admin_id'])) {
                     <li><a href="tourist-spot.php" class="nav-spots"><i class="bi bi-card-image"></i> Tourist Spot</a></li>
                     <li><a href="restaurant.php" class="nav-resto"><i class="bi bi-egg-fried"></i> Restaurant</a></li>
                     <li><a href="contact.php" class="nav-contact"><i class="bi bi-telephone-fill"></i> Contact</a></li>
+                    <li><a href="qr.php" class="nav-qr"><i class="bi bi-qr-code"></i> QR Code</a></li>
                 </ul>
             </li>
         </ul>
