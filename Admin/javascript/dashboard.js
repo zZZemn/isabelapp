@@ -60,7 +60,7 @@ $(document).ready(function () {
         showInLegend: true,
         name: "Visits",
         axisYType: "secondary",
-        color: "#4443AD",
+        color: "#198754 ",
         dataPoints: [],
       },
     ],
