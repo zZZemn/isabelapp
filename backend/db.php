@@ -1,8 +1,8 @@
 <?php
 define("db_host", "localhost");
-define("db_user", "isabelapp");
-define("db_pass", "Isabelapp!1");
-define("db_name", "isabelapp");
+define("db_user", "u784162805_isabelapp");
+define("db_pass", "qwerty0516javascripT!");
+define("db_name", "u784162805_isabelapp");
 
 class db_connect
 {
