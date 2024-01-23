@@ -9,3 +9,16 @@
   width: 300px;
   margin: auto;
 }
+
+/* QR */
+.qr-container {
+  width: 250px;
+  height: 250px;
+  display: flex;
+  align-items: center;
+}
+
+.qr-container img {
+  height: 200px;
+  width: 200px;
+}
