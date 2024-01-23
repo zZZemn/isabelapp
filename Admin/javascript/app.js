@@ -454,5 +454,8 @@ $(document).ready(function () {
   });
   // End of Tourist Spot
 
+  // Dashboard
+  // End of Dashboard
+
   screenSize();
 });

@@ -22,3 +22,8 @@
   height: 200px;
   width: 200px;
 }
+
+/* Dashboard */
+#chartContainer {
+  margin-top: 100px !important;
+}

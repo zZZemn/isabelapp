@@ -575,4 +575,29 @@ class global_class extends db_connect
             return $result;
         }
     }
+
+    // Site Visits
+    public function insertSiteVisit()
+    {
+        date_default_timezone_set('Asia/Manila');
+        $currentDate = date('Y-m-d');
+        $currentTime = time();
+        $formattedTime = date('H:i:s', $currentTime);
+        $query = $this->conn->prepare("INSERT INTO `site_visits`(`DATE`, `TIME`) VALUES ('$currentDate', '$formattedTime')");
+        if ($query->execute()) {
+            return 200;
+        }
+    }
+
+    public function getSiteVisits($date)
+    {
+        $query = $this->conn->prepare("SELECT `DATE` ,HOUR(`TIME`) AS visit_hour, COUNT(*) AS total_visits
+                                       FROM `site_visits`
+                                       WHERE `DATE` = '$date'
+                                       GROUP BY visit_hour;");
+        if ($query->execute()) {
+            $result = $query->get_result();
+            return $result;
+        }
+    }
 }

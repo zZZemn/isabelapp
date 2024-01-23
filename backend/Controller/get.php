@@ -32,6 +32,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             }
 
             echo json_encode($data);
+        } elseif ($_GET['SubmitType'] == 'GetDashboard') {
+            $date = $_GET['date'];
+            $getSiteVisits = $db->getSiteVisits($date);
+            $data = [];
+
+            while ($visit = $getSiteVisits->fetch_assoc()) {
+                $visits = [
+                    'date' => $visit['DATE'],
+                    'time' => $visit['visit_hour'],
+                    'total_visit' => $visit['total_visits']
+                ];
+
+                $data[] = $visits;
+            }
+
+            echo json_encode($data);
         }
     }
 }
