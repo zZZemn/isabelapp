@@ -1,7 +1,7 @@
 <?php
 define("db_host", "localhost");
-define("db_user", "root");
-define("db_pass", "");
+define("db_user", "isabelapp");
+define("db_pass", "Isabelapp!1");
 define("db_name", "isabelapp");
 
 class db_connect
